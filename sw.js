@@ -1,11 +1,10 @@
-const CACHE = 'tirafune-v1';
+const CACHE = 'tirafune-v2';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&display=swap'
+  '/tira-fune/',
+  '/tira-fune/index.html',
+  '/tira-fune/manifest.json',
+  '/tira-fune/icons/icon-192.png',
+  '/tira-fune/icons/icon-512.png',
 ];
 
 self.addEventListener('install', e => {
@@ -26,6 +25,8 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => caches.match('/index.html')))
+    caches.match(e.request).then(cached => 
+      cached || fetch(e.request).catch(() => caches.match('/tira-fune/index.html'))
+    )
   );
 });
