@@ -1,4 +1,4 @@
-const CACHE = 'tirafune-v2';
+const CACHE = 'tirafune-v3';
 const ASSETS = [
   '/tira-fune/',
   '/tira-fune/index.html',
@@ -25,7 +25,7 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cached => 
+    caches.match(e.request).then(cached =>
       cached || fetch(e.request).catch(() => caches.match('/tira-fune/index.html'))
     )
   );
