@@ -35,10 +35,8 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .mode-tabs{display:flex;gap:8px;}
 .mode-tab{flex:1;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;cursor:pointer;text-align:center;transition:all .15s;}
 .mode-tab.active{background:var(--accent);border-color:var(--accent);color:white;}
-.mode-tab.disabled{opacity:.35;cursor:not-allowed;}
 
 .section-label{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-
 .section-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:13px 14px;display:flex;flex-direction:column;gap:9px;}
 .section-card-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:7px;margin-bottom:2px;}
 
@@ -59,6 +57,24 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .info-pill{background:rgba(240,184,0,.08);border:1px solid rgba(240,184,0,.2);border-radius:10px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;font-size:.88rem;color:rgba(240,184,0,.7);}
 .info-pill .pill-val{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--warm);}
 
+/* Toggle switch */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:6px 4px;}
+.toggle-label{font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);}
+.toggle{position:relative;width:48px;height:26px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--border);border-radius:13px;cursor:pointer;transition:.3s;}
+.toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:var(--muted);border-radius:50%;transition:.3s;}
+.toggle input:checked+.toggle-slider{background:var(--accent);}
+.toggle input:checked+.toggle-slider:before{transform:translateX(22px);background:white;}
+
+/* Recap */
+.recap-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;}
+.recap-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:6px;}
+.recap-row{display:flex;justify-content:space-between;align-items:center;font-size:.88rem;color:var(--muted);padding:2px 0;}
+.recap-row .rv{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);}
+.recap-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:7px;margin-top:2px;}
+.recap-total span{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--accent);}
+
 .start-btn{background:var(--accent);color:white;border:none;border-radius:18px;padding:21px;font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:4px;width:100%;cursor:pointer;box-shadow:0 8px 32px rgba(255,58,58,.4);transition:transform .1s;margin-top:4px;}
 .start-btn:active{transform:scale(.97);}
 
@@ -69,20 +85,32 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 
 .timer-top{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .round-badge{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1.5px;background:rgba(0,0,0,.3);padding:7px 14px;border-radius:30px;color:white;text-align:center;line-height:1.35;flex:1;}
-
 .top-btns{display:flex;gap:8px;flex-shrink:0;}
 .icon-btn{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);color:white;border-radius:30px;padding:7px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;}
 .icon-btn:active{background:rgba(0,0,0,.55);}
+
+.weight-display{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:7px 14px;color:white;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;}
 
 .timer-center{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;}
 .phase-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,6vw,2rem);letter-spacing:5px;color:white;text-shadow:0 2px 20px rgba(0,0,0,.5);}
 .team-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,10vw,3.5rem);letter-spacing:4px;color:white;text-shadow:0 4px 24px rgba(0,0,0,.45);line-height:1;}
 .big-timer{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,30vw,10rem);color:white;text-shadow:0 8px 40px rgba(0,0,0,.45);line-height:.9;}
 
-/* Paused overlay */
 .paused-overlay{position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
 .paused-label{font-family:'Bebas Neue',sans-serif;font-size:4rem;letter-spacing:6px;color:white;}
 .resume-btn{background:var(--accent);color:white;border:none;border-radius:16px;padding:18px 48px;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:3px;cursor:pointer;}
+
+/* Top Set overlay */
+.topset-overlay{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;}
+.topset-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:4px;color:white;text-align:center;line-height:1.2;}
+.topset-sub{font-size:.95rem;color:var(--muted);text-align:center;}
+.topset-input-row{display:flex;align-items:center;gap:12px;width:100%;}
+.topset-input{background:var(--card);border:2px solid var(--accent);border-radius:14px;color:white;font-family:'Bebas Neue',sans-serif;font-size:3rem;text-align:center;width:100%;padding:12px;outline:none;letter-spacing:3px;}
+.topset-unit{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--muted);}
+.topset-confirm{background:var(--accent);color:white;border:none;border-radius:14px;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;cursor:pointer;width:100%;}
+.topset-calc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;width:100%;display:flex;flex-direction:column;gap:8px;}
+.topset-calc-row{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted);}
+.topset-calc-row .tcv{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--warm);}
 
 .timer-bottom{width:100%;display:flex;flex-direction:column;gap:12px;align-items:center;}
 .progress-wrap{width:100%;height:8px;background:rgba(0,0,0,.3);border-radius:4px;overflow:hidden;}
@@ -92,7 +120,6 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .phase-dot.done{background:rgba(255,255,255,.55);}
 .phase-dot.current{background:white;box-shadow:0 0 8px white;}
 
-/* Done */
 .done-screen{position:fixed;inset:0;z-index:20;background:#0d1b2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:calc(36px + env(safe-area-inset-top)) 36px calc(36px + env(safe-area-inset-bottom));}
 .done-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,13vw,4.5rem);color:white;letter-spacing:5px;text-align:center;line-height:1.1;}
 .done-stats{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;width:100%;display:flex;flex-direction:column;gap:0;}
@@ -100,7 +127,6 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .done-stat-row:last-child{border-bottom:none;}
 .done-stat-row .dsv{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);}
 .again-btn{background:var(--accent);color:white;border:none;border-radius:14px;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;cursor:pointer;width:100%;}
-
 .hidden{display:none!important;}
 </style>
 </head>
@@ -114,165 +140,175 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     <div class="app-sub">COMPETITION TIMER</div>
   </div>
 
+  <!-- MODE TABS -->
   <div>
     <div class="section-label">🏋️ Tipo allenamento</div>
     <div class="mode-tabs">
-      <div class="mode-tab active">RESISTENZA</div>
-      <div class="mode-tab disabled">FORZA</div>
+      <div class="mode-tab active" id="tab-res" onclick="setMode('res')">RESISTENZA</div>
+      <div class="mode-tab" id="tab-for" onclick="setMode('for')">FORZA</div>
     </div>
   </div>
 
-  <!-- Squadre -->
+  <!-- Squadre (shared) -->
   <div>
     <div class="section-label">🏷 Squadre</div>
     <div class="name-row">
-      <div class="name-box">
-        <label>Squadra A</label>
-        <input id="nameA" type="text" value="Squadra A" maxlength="12" oninput="updateSummaries()">
-      </div>
-      <div class="name-box">
-        <label>Squadra B</label>
-        <input id="nameB" type="text" value="Squadra B" maxlength="12" oninput="updateSummaries()">
-      </div>
+      <div class="name-box"><label>Squadra A</label><input id="nameA" type="text" value="Squadra A" maxlength="12" oninput="updateSummaries()"></div>
+      <div class="name-box"><label>Squadra B</label><input id="nameB" type="text" value="Squadra B" maxlength="12" oninput="updateSummaries()"></div>
     </div>
   </div>
 
-  <!-- RISCALDAMENTO -->
-  <div>
-    <div class="section-label">🔥 Riscaldamento</div>
-    <div class="section-card">
-      <div class="section-card-title">PARAMETRI RISCALDAMENTO</div>
+  <!-- ══════════ RESISTENZA SETUP ══════════ -->
+  <div id="mode-res">
 
-      <div class="param-box">
-        <div class="param-info"><label>Numero tirate</label>
-          <div class="param-value" id="val-warmRounds">3<span class="unit">×</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('warmRounds',-1)">−</button>
-          <button ontouchstart="" onclick="adjust('warmRounds',1)">+</button>
-        </div>
+    <!-- RISCALDAMENTO -->
+    <div style="display:flex;flex-direction:column;gap:15px;">
+    <div>
+      <div class="section-label">🔥 Riscaldamento</div>
+      <div class="section-card">
+        <div class="section-card-title">PARAMETRI RISCALDAMENTO</div>
+        <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-warmRounds">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmRounds',-1)">−</button><button ontouchstart="" onclick="adjust('warmRounds',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-warmDuration">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmDuration',-5)">−</button><button ontouchstart="" onclick="adjust('warmDuration',5)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-warmRecovery">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmRecovery',-5)">−</button><button ontouchstart="" onclick="adjust('warmRecovery',5)">+</button></div></div>
       </div>
+    </div>
 
-      <div class="param-box">
-        <div class="param-info"><label>Durata tirata</label>
-          <div class="param-value" id="val-warmDuration">60<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('warmDuration',-5)">−</button>
-          <button ontouchstart="" onclick="adjust('warmDuration',5)">+</button>
-        </div>
+    <div>
+      <div class="section-label">⏸ Pausa post-riscaldamento</div>
+      <div class="section-card">
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-midBreak">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('midBreak',-10)">−</button><button ontouchstart="" onclick="adjust('midBreak',10)">+</button></div></div>
       </div>
+    </div>
 
-      <div class="param-box">
-        <div class="param-info"><label>Recupero tra tirate</label>
-          <div class="param-value" id="val-warmRecovery">60<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('warmRecovery',-5)">−</button>
-          <button ontouchstart="" onclick="adjust('warmRecovery',5)">+</button>
+    <div>
+      <div class="section-label">⚡ Allenamento</div>
+      <div class="section-card">
+        <div class="section-card-title">STRUTTURA BLOCCHI</div>
+        <div class="param-box"><div class="param-info"><label>Numero blocchi</label><div class="param-value" id="val-blocks">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('blocks',-1)">−</button><button ontouchstart="" onclick="adjust('blocks',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Tirate per blocco</label><div class="param-value" id="val-tiratePerBlock">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('tiratePerBlock',-1)">−</button><button ontouchstart="" onclick="adjust('tiratePerBlock',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-trainRecovery">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('trainRecovery',-10)">−</button><button ontouchstart="" onclick="adjust('trainRecovery',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra blocchi</label><div class="param-value" id="val-blockRecovery">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('blockRecovery',-10)">−</button><button ontouchstart="" onclick="adjust('blockRecovery',10)">+</button></div></div>
+        <div class="info-pill"><span>Tirate totali allenamento</span><span class="pill-val" id="pill-tirateTotal">—</span></div>
+        <div style="height:1px;background:var(--border);margin:2px 0;"></div>
+        <div class="section-card-title" style="margin-bottom:0;">STRUTTURA TIRATA</div>
+        <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-attacks">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('attacks',-1)">−</button><button ontouchstart="" onclick="adjust('attacks',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-attackDur">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('attackDur',-5)">−</button><button ontouchstart="" onclick="adjust('attackDur',5)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-holdDur">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('holdDur',-1)">−</button><button ontouchstart="" onclick="adjust('holdDur',1)">+</button></div></div>
+        <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-tiratadur">—</span></div>
+      </div>
+    </div>
+    </div>
+
+  </div><!-- end mode-res -->
+
+  <!-- ══════════ FORZA SETUP ══════════ -->
+  <div id="mode-for" class="hidden">
+    <div style="display:flex;flex-direction:column;gap:15px;">
+
+    <!-- Riscaldamento forza -->
+    <div>
+      <div class="section-label">🔥 Riscaldamento</div>
+      <div class="section-card">
+        <div class="section-card-title">RISCALDAMENTO</div>
+        <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fwR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwR',-1)">−</button><button ontouchstart="" onclick="fadjust('fwR',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-fwDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwDur',-5)">−</button><button ontouchstart="" onclick="fadjust('fwDur',5)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fwRec">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwRec',-10)">−</button><button ontouchstart="" onclick="fadjust('fwRec',10)">+</button></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">⏸ Pausa riscaldamento → top set</div>
+      <div class="section-card">
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb1">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb1',-10)">−</button><button ontouchstart="" onclick="fadjust('fb1',10)">+</button></div></div>
+      </div>
+    </div>
+
+    <!-- Top Set -->
+    <div>
+      <div class="section-label">🏆 Top Set</div>
+      <div class="section-card">
+        <div class="section-card-title">TOP SET</div>
+        <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-ftsR">2<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsR',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsR',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-ftsDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsDur',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsDur',5)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-ftsRec">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsRec',-10)">−</button><button ontouchstart="" onclick="fadjust('ftsRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Peso stimato</label><div class="param-value" id="val-ftsW">400<span class="unit">kg</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsW',-10)">−</button><button ontouchstart="" onclick="fadjust('ftsW',10)">+</button></div></div>
+        <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fts" onchange="ftoggleAlt('fts')"><span class="toggle-slider"></span></label></div>
+        <div id="alt-fts" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
+          <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-ftsAtt">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsAtt',5)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-ftsHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsHold',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsHold',1)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-ftsAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsAtk',1)">+</button></div></div>
+          <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fts">—</span></div>
+        </div>
+        <div id="single-fts">
+          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-ftsSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsSingle',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsSingle',5)">+</button></div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- PAUSA post-riscaldamento -->
-  <div>
-    <div class="section-label">⏸ Pausa post-riscaldamento</div>
-    <div class="section-card">
-      <div class="param-box" style="background:transparent;border:none;padding:0 2px;">
-        <div class="param-info"><label>Durata pausa</label>
-          <div class="param-value" id="val-midBreak">120<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('midBreak',-10)">−</button>
-          <button ontouchstart="" onclick="adjust('midBreak',10)">+</button>
+    <div>
+      <div class="section-label">⏸ Pausa top set → back off</div>
+      <div class="section-card">
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb2">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb2',-10)">−</button><button ontouchstart="" onclick="fadjust('fb2',10)">+</button></div></div>
+      </div>
+    </div>
+
+    <!-- Back Off -->
+    <div>
+      <div class="section-label">💪 Back Off</div>
+      <div class="section-card">
+        <div class="section-card-title">BACK OFF</div>
+        <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fboR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboR',-1)">−</button><button ontouchstart="" onclick="fadjust('fboR',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fboRec">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboRec',-10)">−</button><button ontouchstart="" onclick="fadjust('fboRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fboPct">80<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fboPct',5)">+</button></div></div>
+        <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fbo" onchange="ftoggleAlt('fbo')"><span class="toggle-slider"></span></label></div>
+        <div id="alt-fbo" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
+          <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-fboAtt">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('fboAtt',5)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fboHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboHold',-1)">−</button><button ontouchstart="" onclick="fadjust('fboHold',1)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-fboAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('fboAtk',1)">+</button></div></div>
+          <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fbo">—</span></div>
+        </div>
+        <div id="single-fbo">
+          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fboSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboSingle',-5)">−</button><button ontouchstart="" onclick="fadjust('fboSingle',5)">+</button></div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ALLENAMENTO -->
-  <div>
-    <div class="section-label">⚡ Allenamento</div>
-    <div class="section-card">
-      <div class="section-card-title">STRUTTURA BLOCCHI</div>
+    <div>
+      <div class="section-label">⏸ Pausa back off → resistenza</div>
+      <div class="section-card">
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb3">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb3',-10)">−</button><button ontouchstart="" onclick="fadjust('fb3',10)">+</button></div></div>
+      </div>
+    </div>
 
-      <div class="param-box">
-        <div class="param-info"><label>Numero blocchi</label>
-          <div class="param-value" id="val-blocks">3<span class="unit">×</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('blocks',-1)">−</button>
-          <button ontouchstart="" onclick="adjust('blocks',1)">+</button>
+    <!-- Resistenza forza -->
+    <div>
+      <div class="section-label">🔁 Resistenza</div>
+      <div class="section-card">
+        <div class="section-card-title">RESISTENZA</div>
+        <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fresR">4<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresR',-1)">−</button><button ontouchstart="" onclick="fadjust('fresR',1)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fresRec">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresRec',-10)">−</button><button ontouchstart="" onclick="fadjust('fresRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fresPct">70<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fresPct',5)">+</button></div></div>
+        <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fres" onchange="ftoggleAlt('fres')"><span class="toggle-slider"></span></label></div>
+        <div id="alt-fres" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
+          <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-fresAtt">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('fresAtt',5)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fresHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresHold',-1)">−</button><button ontouchstart="" onclick="fadjust('fresHold',1)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-fresAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('fresAtk',1)">+</button></div></div>
+          <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fres">—</span></div>
+        </div>
+        <div id="single-fres">
+          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fresSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresSingle',-5)">−</button><button ontouchstart="" onclick="fadjust('fresSingle',5)">+</button></div></div>
         </div>
       </div>
+    </div>
 
-      <div class="param-box">
-        <div class="param-info"><label>Tirate per blocco</label>
-          <div class="param-value" id="val-tiratePerBlock">3<span class="unit">×</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('tiratePerBlock',-1)">−</button>
-          <button ontouchstart="" onclick="adjust('tiratePerBlock',1)">+</button>
-        </div>
-      </div>
-
-      <div class="param-box">
-        <div class="param-info"><label>Recupero tra tirate</label>
-          <div class="param-value" id="val-trainRecovery">90<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('trainRecovery',-10)">−</button>
-          <button ontouchstart="" onclick="adjust('trainRecovery',10)">+</button>
-        </div>
-      </div>
-
-      <div class="param-box">
-        <div class="param-info"><label>Recupero tra blocchi</label>
-          <div class="param-value" id="val-blockRecovery">180<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('blockRecovery',-10)">−</button>
-          <button ontouchstart="" onclick="adjust('blockRecovery',10)">+</button>
-        </div>
-      </div>
-
-      <!-- Pill tirate totali -->
-      <div class="info-pill">
-        <span>Tirate totali allenamento</span>
-        <span class="pill-val" id="pill-tirateTotal">—</span>
-      </div>
-
-      <div style="height:1px;background:var(--border);margin:2px 0;"></div>
-      <div class="section-card-title" style="margin-bottom:0;">STRUTTURA TIRATA</div>
-
-      <div class="param-box">
-        <div class="param-info"><label>Numero attacchi</label>
-          <div class="param-value" id="val-attacks">3<span class="unit">×</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('attacks',-1)">−</button>
-          <button ontouchstart="" onclick="adjust('attacks',1)">+</button>
-        </div>
-      </div>
-
-      <div class="param-box">
-        <div class="param-info"><label>Durata attacco</label>
-          <div class="param-value" id="val-attackDur">30<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('attackDur',-5)">−</button>
-          <button ontouchstart="" onclick="adjust('attackDur',5)">+</button>
-        </div>
-      </div>
-
-      <div class="param-box">
-        <div class="param-info"><label>Durata tenuta</label>
-          <div class="param-value" id="val-holdDur">10<span class="unit">sec</span></div></div>
-        <div class="stepper">
-          <button ontouchstart="" onclick="adjust('holdDur',-1)">−</button>
-          <button ontouchstart="" onclick="adjust('holdDur',1)">+</button>
-        </div>
-      </div>
-
-      <!-- Live pill -->
-      <div class="info-pill">
-        <span>Durata tirata</span>
-        <span class="pill-val" id="pill-tiratadur">—</span>
-      </div>
+    <!-- Recap forza -->
+    <div>
+      <div class="section-label">📋 Recap allenamento</div>
+      <div class="recap-box" id="recapForza"></div>
+    </div>
 
     </div>
-  </div>
+  </div><!-- end mode-for -->
 
   <button class="start-btn" onclick="startWorkout()">🚀 INIZIA</button>
 </div>
@@ -281,31 +317,38 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 <div id="timer" class="screen">
   <div class="timer-bg" id="timerBg"></div>
 
-  <!-- Paused overlay -->
   <div id="pausedOverlay" class="paused-overlay hidden">
     <div class="paused-label">⏸ PAUSA</div>
     <button class="resume-btn" onclick="togglePause()">▶ RIPRENDI</button>
+  </div>
+
+  <div id="topsetOverlay" class="topset-overlay hidden">
+    <div class="topset-title">FINE TOP SET<br>INSERISCI PESO REALE</div>
+    <div class="topset-sub">Calcola automaticamente Back Off e Resistenza</div>
+    <div class="topset-input-row">
+      <input id="topsetInput" class="topset-input" type="number" placeholder="000" inputmode="numeric">
+      <span class="topset-unit">kg</span>
+    </div>
+    <div class="topset-calc" id="topsetCalc"></div>
+    <button class="topset-confirm" onclick="confirmTopSet()">✓ CONFERMA E CONTINUA</button>
   </div>
 
   <div class="timer-content">
     <div class="timer-top">
       <div class="round-badge" id="roundBadge">—</div>
       <div class="top-btns">
+        <div id="weightDisplay" class="weight-display hidden">— kg</div>
         <button class="icon-btn" id="pauseBtn" onclick="togglePause()">⏸</button>
         <button class="icon-btn" onclick="stopWorkout()">✕</button>
       </div>
     </div>
-
     <div class="timer-center">
       <div class="phase-label" id="phaseLabel">—</div>
       <div class="team-name"   id="teamName">—</div>
       <div class="big-timer"   id="bigTimer">—</div>
     </div>
-
     <div class="timer-bottom">
-      <div class="progress-wrap">
-        <div class="progress-fill" id="progressFill" style="width:100%"></div>
-      </div>
+      <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:100%"></div></div>
       <div class="phase-dots" id="phaseDots"></div>
     </div>
   </div>
@@ -320,47 +363,47 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 
 <script>
 // ═══════════════════════════════════════
-// PARAMS
+// MODE
+// ═══════════════════════════════════════
+let currentMode = 'res'; // 'res' | 'for'
+
+function setMode(m){
+  currentMode = m;
+  document.getElementById('tab-res').classList.toggle('active', m==='res');
+  document.getElementById('tab-for').classList.toggle('active', m==='for');
+  document.getElementById('mode-res').classList.toggle('hidden', m!=='res');
+  document.getElementById('mode-for').classList.toggle('hidden', m!=='for');
+  if(m==='for') updateForzaRecap();
+}
+
+// ═══════════════════════════════════════
+// RESISTENZA PARAMS (unchanged)
 // ═══════════════════════════════════════
 const PROTO_DUR = 30;
 
 const p = {
-  warmRounds:    3,
-  warmDuration:  60,
-  warmRecovery:  60,
-  midBreak:      120,
-  blocks:        3,
-  tiratePerBlock:3,
-  trainRecovery: 90,
-  blockRecovery: 180,
-  attacks:       3,
-  attackDur:     30,
-  holdDur:       10,
+  warmRounds:3, warmDuration:60, warmRecovery:60,
+  midBreak:120,
+  blocks:3, tiratePerBlock:3, trainRecovery:90, blockRecovery:180,
+  attacks:3, attackDur:30, holdDur:10,
 };
-
 const LIMITS = {
-  warmRounds:    {min:1,max:20},
-  warmDuration:  {min:10,max:300},
-  warmRecovery:  {min:10,max:300},
-  midBreak:      {min:10,max:600},
-  blocks:        {min:1,max:10},
-  tiratePerBlock:{min:1,max:20},
-  trainRecovery: {min:10,max:600},
-  blockRecovery: {min:10,max:600},
-  attacks:       {min:1,max:10},
-  attackDur:     {min:5,max:180},
-  holdDur:       {min:3,max:60},
+  warmRounds:{min:1,max:20}, warmDuration:{min:10,max:300}, warmRecovery:{min:10,max:300},
+  midBreak:{min:10,max:600},
+  blocks:{min:1,max:10}, tiratePerBlock:{min:1,max:20},
+  trainRecovery:{min:10,max:600}, blockRecovery:{min:10,max:600},
+  attacks:{min:1,max:10}, attackDur:{min:5,max:180}, holdDur:{min:3,max:60},
 };
-
 const UNITS = {
-  warmRounds:'×', warmDuration:'sec', warmRecovery:'sec',
-  midBreak:'sec', blocks:'×', tiratePerBlock:'×',
-  trainRecovery:'sec', blockRecovery:'sec',
-  attacks:'×', attackDur:'sec', holdDur:'sec',
+  warmRounds:'×',warmDuration:'sec',warmRecovery:'sec',
+  midBreak:'sec',blocks:'×',tiratePerBlock:'×',
+  trainRecovery:'sec',blockRecovery:'sec',
+  attacks:'×',attackDur:'sec',holdDur:'sec',
 };
 
 function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
 function fmt(s){const m=Math.floor(s/60),sc=s%60;return m>0?(sc>0?`${m}m ${sc}s`:`${m}m`):`${s}s`;}
+function round5(v){return Math.round(v/5)*5;}
 
 function adjust(key,delta){
   const {min,max}=LIMITS[key];
@@ -368,136 +411,232 @@ function adjust(key,delta){
   document.getElementById(`val-${key}`).innerHTML=`${p[key]}<span class="unit">${UNITS[key]}</span>`;
   updateSummaries();
 }
-
 function updateSummaries(){
-  const tirataS = p.attacks * (p.holdDur + p.attackDur);
+  const tirataS = p.attacks*(p.holdDur+p.attackDur);
   document.getElementById('pill-tiratadur').textContent = fmt(tirataS);
-  const totTirate = p.blocks * p.tiratePerBlock;
-  document.getElementById('pill-tirateTotal').textContent = totTirate + ' tirate';
+  document.getElementById('pill-tirateTotal').textContent = (p.blocks*p.tiratePerBlock)+' tirate';
+}
+
+// ═══════════════════════════════════════
+// FORZA PARAMS
+// ═══════════════════════════════════════
+const fp = {
+  fwR:3, fwDur:60, fwRec:60,
+  fb1:120,
+  ftsR:2, ftsDur:60, ftsRec:120, ftsW:400, ftsAtt:30, ftsHold:10, ftsAtk:3, ftsSingle:60,
+  fb2:180,
+  fboR:3, fboRec:90, fboPct:80, fboAtt:30, fboHold:10, fboAtk:3, fboSingle:60,
+  fb3:180,
+  fresR:4, fresRec:90, fresPct:70, fresAtt:30, fresHold:10, fresAtk:3, fresSingle:60,
+};
+const fLIMITS = {
+  fwR:{min:1,max:20}, fwDur:{min:10,max:300}, fwRec:{min:10,max:300},
+  fb1:{min:10,max:600},
+  ftsR:{min:1,max:10}, ftsDur:{min:10,max:300}, ftsRec:{min:10,max:600}, ftsW:{min:10,max:2000},
+  ftsAtt:{min:5,max:180}, ftsHold:{min:3,max:60}, ftsAtk:{min:1,max:10}, ftsSingle:{min:10,max:300},
+  fb2:{min:10,max:600},
+  fboR:{min:1,max:20}, fboRec:{min:10,max:600}, fboPct:{min:10,max:100},
+  fboAtt:{min:5,max:180}, fboHold:{min:3,max:60}, fboAtk:{min:1,max:10}, fboSingle:{min:10,max:300},
+  fb3:{min:10,max:600},
+  fresR:{min:1,max:20}, fresRec:{min:10,max:600}, fresPct:{min:10,max:100},
+  fresAtt:{min:5,max:180}, fresHold:{min:3,max:60}, fresAtk:{min:1,max:10}, fresSingle:{min:10,max:300},
+};
+const fUNITS = {
+  fwR:'×',fwDur:'sec',fwRec:'sec',
+  fb1:'sec',
+  ftsR:'×',ftsDur:'sec',ftsRec:'sec',ftsW:'kg',ftsAtt:'sec',ftsHold:'sec',ftsAtk:'×',ftsSingle:'sec',
+  fb2:'sec',
+  fboR:'×',fboRec:'sec',fboPct:'%',fboAtt:'sec',fboHold:'sec',fboAtk:'×',fboSingle:'sec',
+  fb3:'sec',
+  fresR:'×',fresRec:'sec',fresPct:'%',fresAtt:'sec',fresHold:'sec',fresAtk:'×',fresSingle:'sec',
+};
+
+const fAltMode = {fts:false, fbo:false, fres:false};
+
+function fadjust(key,delta){
+  const {min,max}=fLIMITS[key];
+  fp[key]=clamp(fp[key]+delta,min,max);
+  document.getElementById(`val-${key}`).innerHTML=`${fp[key]}<span class="unit">${fUNITS[key]}</span>`;
+  updateForzaPills();
+  updateForzaRecap();
+}
+
+function ftoggleAlt(block){
+  fAltMode[block] = document.getElementById(`tog-${block}`).checked;
+  document.getElementById(`alt-${block}`).classList.toggle('hidden', !fAltMode[block]);
+  document.getElementById(`single-${block}`).classList.toggle('hidden', fAltMode[block]);
+  updateForzaPills();
+  updateForzaRecap();
+}
+
+function fTirataDur(block){
+  if(fAltMode[block]){
+    const pre = block==='fts'?'fts':block==='fbo'?'fbo':'fres';
+    return fp[`${pre}Atk`]*(fp[`${pre}Hold`]+fp[`${pre}Att`]);
+  } else {
+    const pre = block==='fts'?'ftsSingle':block==='fbo'?'fboSingle':'fresSingle';
+    return fp[pre];
+  }
+}
+
+function updateForzaPills(){
+  ['fts','fbo','fres'].forEach(b=>{
+    const el=document.getElementById(`pill-${b}`);
+    if(el) el.textContent=fmt(fTirataDur(b));
+  });
+}
+
+function blockTotalDur(nTirate, tirSec, recSec){
+  return nTirate*(PROTO_DUR+tirSec)+(nTirate-1)*recSec;
+}
+
+function updateForzaRecap(){
+  const wDur  = fp.fwDur;
+  const tsDur = fTirataDur('fts');
+  const boDur = fTirataDur('fbo');
+  const rDur  = fTirataDur('fres');
+  const wTotal  = blockTotalDur(fp.fwR,  wDur,  fp.fwRec);
+  const tsTotal = blockTotalDur(fp.ftsR, tsDur, fp.ftsRec);
+  const boTotal = blockTotalDur(fp.fboR, boDur, fp.fboRec);
+  const rTotal  = blockTotalDur(fp.fresR, rDur, fp.fresRec);
+  const grand   = wTotal+fp.fb1+tsTotal+fp.fb2+boTotal+fp.fb3+rTotal;
+  const boW  = round5(fp.ftsW*fp.fboPct/100);
+  const resW = round5(fp.ftsW*fp.fresPct/100);
+  document.getElementById('recapForza').innerHTML=`
+    <div class="recap-total">TOTALE STIMATO <span>${fmt(grand)}</span></div>
+  `;
 }
 
 // ═══════════════════════════════════════
 // AUDIO
 // ═══════════════════════════════════════
 let audioCtx=null;
-function getAudio(){
-  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  return audioCtx;
-}
-function beep(freq,dur,type,vol){
-  type=type||'sine'; vol=vol||0.5;
-  try{
-    const c=getAudio(),o=c.createOscillator(),g=c.createGain();
-    o.connect(g);g.connect(c.destination);
-    o.type=type;o.frequency.value=freq;
-    g.gain.setValueAtTime(vol,c.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);
-    o.start(c.currentTime);o.stop(c.currentTime+dur);
-  }catch(e){}
-}
-
-function playTick()      { beep(700,0.08,'sine',0.35); }
-function playPhaseEnd()  { beep(880,0.12,'sine',0.5); setTimeout(()=>beep(880,0.12,'sine',0.5),220); }
-function playAttackStart(){ beep(1000,0.08,'square',0.4); setTimeout(()=>beep(1200,0.15,'square',0.45),80); }
-function playDone()      { [0,250,500,800].forEach((d,i)=>setTimeout(()=>beep(440+i*110,0.3,'sine',0.5),d)); }
+function getAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+function beep(freq,dur,type,vol){type=type||'sine';vol=vol||0.5;try{const c=getAudio(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
+function playTick(){beep(700,0.08,'sine',0.35);}
+function playPhaseEnd(){beep(880,0.12,'sine',0.5);setTimeout(()=>beep(880,0.12,'sine',0.5),220);}
+function playAttackStart(){beep(1000,0.08,'square',0.4);setTimeout(()=>beep(1200,0.15,'square',0.45),80);}
+function playDone(){[0,250,500,800].forEach((d,i)=>setTimeout(()=>beep(440+i*110,0.3,'sine',0.5),d));}
 
 // ═══════════════════════════════════════
 // SPEECH
 // ═══════════════════════════════════════
-function speak(text){
-  try{
-    window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang='it-IT'; u.rate=0.95; u.pitch=1.05;
-    window.speechSynthesis.speak(u);
-  }catch(e){}
-}
+function speak(text){try{window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='it-IT';u.rate=0.95;u.pitch=1.05;window.speechSynthesis.speak(u);}catch(e){}}
 
 function voiceForPhase(type,extra){
   switch(type){
-    case 'proto':    speak('Protocollo'); break;
-    case 'warm':     speak("Let's go");  break;
-    case 'midbreak': speak('Fine riscaldamento'); break;
-    case 'attack_A': speak(extra); break;
-    case 'attack_B': speak(extra); break;
-    case 'hold':     speak('Tenuta'); break;
-    case 'recovery': speak('Recupero'); break;
-    case 'blockrecovery': speak('Recupero'); break;
-    // warmrec: no voice
+    case 'proto':        speak('Protocollo'); break;
+    case 'warm':         speak("Let's go");  break;
+    case 'single':       speak("Let's go");  break;
+    case 'warmrec':      break;
+    case 'midbreak':     speak('Fine riscaldamento'); break;
+    case 'break':        speak('Pausa'); break;
+    case 'attack_A':     speak(extra); break;
+    case 'attack_B':     speak(extra); break;
+    case 'hold':         speak('Tenuta'); break;
+    case 'recovery':     speak('Recupero'); break;
+    case 'blockrecovery':speak('Recupero'); break;
+    case 'topset_input': break;
   }
 }
 
 // ═══════════════════════════════════════
-// COLORS & LABELS
+// COLORS
 // ═══════════════════════════════════════
 const COLORS = {
   proto:        'linear-gradient(160deg,#8a6200 0%,#f0b800 100%)',
   warm:         'linear-gradient(160deg,#126030 0%,#20c060 100%)',
+  single:       'linear-gradient(160deg,#126030 0%,#20c060 100%)',
   warmrec:      'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',
   midbreak:     'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',
+  break:        'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',
   hold:         'linear-gradient(160deg,#906000 0%,#d4a017 100%)',
   attack_A:     'linear-gradient(160deg,#c02800 0%,#ff5030 100%)',
   attack_B:     'linear-gradient(160deg,#0038b0 0%,#3090ff 100%)',
   recovery:     'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',
   blockrecovery:'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',
+  topset_input: 'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',
 };
 
 // ═══════════════════════════════════════
-// SEQUENCE BUILDER
+// SEQUENCE BUILDERS
 // ═══════════════════════════════════════
-function buildSequence(){
-  const nA = document.getElementById('nameA').value.trim()||'Squadra A';
-  const nB = document.getElementById('nameB').value.trim()||'Squadra B';
-  const seq = [];
-
-  // ── RISCALDAMENTO ──
+function buildResistenzaSeq(){
+  const nA=document.getElementById('nameA').value.trim()||'Squadra A';
+  const nB=document.getElementById('nameB').value.trim()||'Squadra B';
+  const seq=[];
+  // Riscaldamento
   for(let w=0;w<p.warmRounds;w++){
     const wn=w+1;
-    seq.push({type:'proto',   duration:PROTO_DUR,  label:'PROTOCOLLO',    name:'PROTOCOLLO', badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
-    seq.push({type:'warm',    duration:p.warmDuration, label:'RISCALDAMENTO', name:"LET'S GO",   badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
-    if(w<p.warmRounds-1){
-      seq.push({type:'warmrec', duration:p.warmRecovery, label:'RECUPERO', name:'RECUPERO', badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
-    }
+    seq.push({type:'proto',   duration:PROTO_DUR, label:'PROTOCOLLO',    name:'PROTOCOLLO', badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
+    seq.push({type:'warm',    duration:p.warmDuration, label:'RISCALDAMENTO', name:"LET'S GO", badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
+    if(w<p.warmRounds-1) seq.push({type:'warmrec', duration:p.warmRecovery, label:'RECUPERO', name:'RECUPERO', badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
   }
-
-  // ── PAUSA POST-RISCALDAMENTO ──
   seq.push({type:'midbreak', duration:p.midBreak, label:'FINE RISCALDAMENTO', name:'PAUSA', badge:'PAUSA', extra:''});
-
-  // ── ALLENAMENTO: BLOCCHI ──
+  // Blocchi
   for(let b=0;b<p.blocks;b++){
     const bn=b+1;
-
     for(let t=0;t<p.tiratePerBlock;t++){
       const tn=t+1;
       const badge=`BL. ${bn}/${p.blocks} · TIR. ${tn}/${p.tiratePerBlock}`;
-
-      // Protocollo prima di ogni tirata
       seq.push({type:'proto', duration:PROTO_DUR, label:'PROTOCOLLO', name:'PROTOCOLLO', badge, extra:''});
-
-      // Tirata: hold→attacco ripetuto p.attacks volte, alternando A e B
       for(let a=0;a<p.attacks;a++){
         const isA=(a%2===0);
         const tname=isA?nA:nB;
-        const atype=isA?'attack_A':'attack_B';
-
-        // Hold sempre prima di ogni attacco
         seq.push({type:'hold', duration:p.holdDur, label:'TENUTA', name:'TENUTA', badge, extra:''});
-        seq.push({type:atype,  duration:p.attackDur, label:'ATTACCO', name:tname, badge, extra:tname});
+        seq.push({type:isA?'attack_A':'attack_B', duration:p.attackDur, label:'ATTACCO', name:tname, badge, extra:tname});
       }
-
-      // Recupero tra tirate (non dopo l'ultima tirata dell'ultimo blocco)
-      const isLastTirata = (t===p.tiratePerBlock-1);
-      const isLastBlock  = (b===p.blocks-1);
-
-      if(!isLastTirata){
-        seq.push({type:'recovery', duration:p.trainRecovery, label:'RECUPERO', name:'RECUPERO', badge, extra:''});
-      } else if(!isLastBlock){
-        // Fine blocco → recupero tra blocchi
-        seq.push({type:'blockrecovery', duration:p.blockRecovery, label:'FINE BLOCCO', name:'RECUPERO', badge:`FINE BL. ${bn}/${p.blocks}`, extra:''});
-      }
+      const isLastT=(t===p.tiratePerBlock-1), isLastB=(b===p.blocks-1);
+      if(!isLastT) seq.push({type:'recovery', duration:p.trainRecovery, label:'RECUPERO', name:'RECUPERO', badge, extra:''});
+      else if(!isLastB) seq.push({type:'blockrecovery', duration:p.blockRecovery, label:'FINE BLOCCO', name:'RECUPERO', badge:`FINE BL. ${bn}/${p.blocks}`, extra:''});
     }
   }
+  return seq;
+}
 
+function buildForzaTirate(block, nTirate, recSec, badgePrefix, isAlt){
+  const nA=document.getElementById('nameA').value.trim()||'Squadra A';
+  const nB=document.getElementById('nameB').value.trim()||'Squadra B';
+  const pre = block==='fts'?'fts':block==='fbo'?'fbo':'fres';
+  const seq=[];
+  for(let t=0;t<nTirate;t++){
+    const badge=`${badgePrefix} ${t+1}/${nTirate}`;
+    seq.push({type:'proto', duration:PROTO_DUR, label:'PROTOCOLLO', name:'PROTOCOLLO', badge, extra:''});
+    if(isAlt){
+      for(let a=0;a<fp[`${pre}Atk`];a++){
+        const isA=(a%2===0), tname=isA?nA:nB;
+        seq.push({type:'hold', duration:fp[`${pre}Hold`], label:'TENUTA', name:'TENUTA', badge, extra:''});
+        seq.push({type:isA?'attack_A':'attack_B', duration:fp[`${pre}Att`], label:'ATTACCO', name:tname, badge, extra:tname});
+      }
+    } else {
+      const dur = block==='fts'?fp.ftsSingle:block==='fbo'?fp.fboSingle:fp.fresSingle;
+      seq.push({type:'single', duration:dur, label:'TIRATA', name:"LET'S GO", badge, extra:''});
+    }
+    if(t<nTirate-1) seq.push({type:'recovery', duration:recSec, label:'RECUPERO', name:'RECUPERO', badge, extra:''});
+  }
+  return seq;
+}
+
+function buildForzaSeq(){
+  const seq=[];
+  // Riscaldamento (sempre singola per forza)
+  for(let w=0;w<fp.fwR;w++){
+    const wn=w+1;
+    seq.push({type:'proto', duration:PROTO_DUR, label:'PROTOCOLLO', name:'PROTOCOLLO', badge:`RISC. ${wn}/${fp.fwR}`, extra:''});
+    seq.push({type:'single', duration:fp.fwDur, label:'RISCALDAMENTO', name:"LET'S GO", badge:`RISC. ${wn}/${fp.fwR}`, extra:''});
+    if(w<fp.fwR-1) seq.push({type:'warmrec', duration:fp.fwRec, label:'RECUPERO', name:'RECUPERO', badge:`RISC. ${wn}/${fp.fwR}`, extra:''});
+  }
+  seq.push({type:'break', duration:fp.fb1, label:'PAUSA', name:'PAUSA', badge:'⏸ PAUSA', extra:''});
+  // Top Set
+  seq.push(...buildForzaTirate('fts', fp.ftsR, fp.ftsRec, '🏆 TOP SET', fAltMode.fts));
+  // Input peso
+  seq.push({type:'topset_input', duration:0, label:'INSERISCI PESO', name:'TOP SET', badge:'🏆 TOP SET', extra:''});
+  seq.push({type:'break', duration:fp.fb2, label:'PAUSA', name:'PAUSA', badge:'⏸ PAUSA', extra:''});
+  // Back Off
+  seq.push(...buildForzaTirate('fbo', fp.fboR, fp.fboRec, '💪 BACK OFF', fAltMode.fbo));
+  seq.push({type:'break', duration:fp.fb3, label:'PAUSA', name:'PAUSA', badge:'⏸ PAUSA', extra:''});
+  // Resistenza
+  seq.push(...buildForzaTirate('fres', fp.fresR, fp.fresRec, '🔁 RESIST.', fAltMode.fres));
   return seq;
 }
 
@@ -505,55 +644,50 @@ function buildSequence(){
 // ENGINE
 // ═══════════════════════════════════════
 let sequence=[], seqIdx=0, ticker=null, curSec=0, curDur=0;
-let isPaused=false, workoutStart=0;
+let isPaused=false, workoutStart=0, realTopSet=0;
 
 function buildDots(){
-  const c=document.getElementById('phaseDots');
-  c.innerHTML='';
-  sequence.forEach(()=>{
-    const d=document.createElement('div');
-    d.className='phase-dot';
-    c.appendChild(d);
+  const c=document.getElementById('phaseDots');c.innerHTML='';
+  sequence.forEach(ph=>{
+    if(ph.type==='topset_input') return;
+    const d=document.createElement('div');d.className='phase-dot';c.appendChild(d);
   });
 }
-
+function getDotIdx(si){let di=0;for(let i=0;i<si;i++)if(sequence[i].type!=='topset_input')di++;return di;}
 function updateDots(){
-  document.querySelectorAll('.phase-dot').forEach((d,i)=>{
-    d.classList.remove('done','current');
-    if(i<seqIdx) d.classList.add('done');
-    else if(i===seqIdx) d.classList.add('current');
-  });
+  const dots=document.querySelectorAll('.phase-dot');
+  const cur=getDotIdx(seqIdx);
+  dots.forEach((d,i)=>{d.classList.remove('done','current');if(i<cur)d.classList.add('done');else if(i===cur)d.classList.add('current');});
 }
-
 function applyPhase(ph){
-  document.getElementById('timerBg').style.background = COLORS[ph.type]||COLORS.recovery;
-  document.getElementById('phaseLabel').textContent = ph.label;
-  document.getElementById('teamName').textContent   = ph.name;
-  document.getElementById('roundBadge').textContent = ph.badge;
+  document.getElementById('timerBg').style.background=COLORS[ph.type]||COLORS.recovery;
+  document.getElementById('phaseLabel').textContent=ph.label;
+  document.getElementById('teamName').textContent=ph.name;
+  document.getElementById('roundBadge').textContent=ph.badge;
   curDur=ph.duration;
   updateDots();
+  updateWeightDisplay(ph);
 }
-
+function updateWeightDisplay(ph){
+  const wd=document.getElementById('weightDisplay');
+  if(realTopSet>0 && ph.badge && (ph.badge.includes('BACK OFF')||ph.badge.includes('RESIST.'))){
+    const pct=ph.badge.includes('BACK OFF')?fp.fboPct:fp.fresPct;
+    wd.textContent=`${round5(realTopSet*pct/100)} kg`;
+    wd.classList.remove('hidden');
+  } else { wd.classList.add('hidden'); }
+}
 function tick(){
   if(isPaused) return;
   curSec--;
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width=(curSec/curDur*100)+'%';
   if(curSec<=3&&curSec>0) playTick();
-  if(curSec<=0){
-    playPhaseEnd();
-    setTimeout(()=>{ if(!isPaused) nextPhase(); },300);
-  }
+  if(curSec<=0){playPhaseEnd();setTimeout(()=>{if(!isPaused)nextPhase();},300);}
 }
-
-function nextPhase(){
-  seqIdx++;
-  if(seqIdx>=sequence.length){ finishWorkout(); return; }
-  launchPhase(seqIdx);
-}
-
+function nextPhase(){seqIdx++;if(seqIdx>=sequence.length){finishWorkout();return;}launchPhase(seqIdx);}
 function launchPhase(idx){
   const ph=sequence[idx];
+  if(ph.type==='topset_input'){showTopSetOverlay();return;}
   applyPhase(ph);
   curSec=ph.duration;
   document.getElementById('bigTimer').textContent=curSec;
@@ -563,71 +697,103 @@ function launchPhase(idx){
 }
 
 // ═══════════════════════════════════════
-// PAUSE
+// TOP SET OVERLAY
+// ═══════════════════════════════════════
+function showTopSetOverlay(){
+  clearInterval(ticker);ticker=null;
+  try{window.speechSynthesis.cancel();}catch(e){}
+  document.getElementById('topsetInput').value='';
+  document.getElementById('topsetCalc').innerHTML=`
+    <div class="topset-calc-row">Top Set stimato<span class="tcv">${fp.ftsW} kg</span></div>
+    <div class="topset-calc-row">Back Off (${fp.fboPct}%)<span class="tcv" id="calc-bo">—</span></div>
+    <div class="topset-calc-row">Resistenza (${fp.fresPct}%)<span class="tcv" id="calc-res">—</span></div>
+  `;
+  document.getElementById('topsetOverlay').classList.remove('hidden');
+  speak('Fine top set. Inserisci il peso reale.');
+  document.getElementById('topsetInput').oninput=function(){
+    const v=parseFloat(this.value)||0;
+    const elBo=document.getElementById('calc-bo'),elRes=document.getElementById('calc-res');
+    if(elBo) elBo.textContent=v>0?`${round5(v*fp.fboPct/100)} kg`:'—';
+    if(elRes) elRes.textContent=v>0?`${round5(v*fp.fresPct/100)} kg`:'—';
+  };
+}
+function confirmTopSet(){
+  const v=parseFloat(document.getElementById('topsetInput').value)||fp.ftsW;
+  realTopSet=v;
+  document.getElementById('topsetOverlay').classList.add('hidden');
+  seqIdx++;
+  if(seqIdx>=sequence.length){finishWorkout();return;}
+  launchPhase(seqIdx);
+  ticker=setInterval(tick,1000);
+}
+
+// ═══════════════════════════════════════
+// PAUSE / START / STOP / DONE
 // ═══════════════════════════════════════
 function togglePause(){
   isPaused=!isPaused;
   document.getElementById('pausedOverlay').classList.toggle('hidden',!isPaused);
-  document.getElementById('pauseBtn').textContent = isPaused ? '▶' : '⏸';
-  if(isPaused){
-    try{window.speechSynthesis.cancel();}catch(e){}
-  }
+  document.getElementById('pauseBtn').textContent=isPaused?'▶':'⏸';
+  if(isPaused) try{window.speechSynthesis.cancel();}catch(e){}
 }
 
-// ═══════════════════════════════════════
-// START / STOP / DONE
-// ═══════════════════════════════════════
 function startWorkout(){
   getAudio();
   try{window.speechSynthesis.cancel();}catch(e){}
-  isPaused=false;
-
-  sequence=buildSequence();
-  seqIdx=0;
-  workoutStart=Date.now();
-
+  isPaused=false; realTopSet=0;
+  sequence = currentMode==='res' ? buildResistenzaSeq() : buildForzaSeq();
+  seqIdx=0; workoutStart=Date.now();
   buildDots();
   document.getElementById('setup').classList.remove('active');
   document.getElementById('timer').classList.add('active');
   document.getElementById('doneScreen').classList.add('hidden');
   document.getElementById('pausedOverlay').classList.add('hidden');
+  document.getElementById('topsetOverlay').classList.add('hidden');
   document.getElementById('pauseBtn').textContent='⏸';
-
+  document.getElementById('weightDisplay').classList.add('hidden');
   launchPhase(0);
   if(ticker) clearInterval(ticker);
   ticker=setInterval(tick,1000);
 }
 
 function stopWorkout(){
-  clearInterval(ticker); ticker=null;
-  isPaused=false;
+  clearInterval(ticker);ticker=null;isPaused=false;
   try{window.speechSynthesis.cancel();}catch(e){}
   goSetup();
 }
 
 function finishWorkout(){
-  clearInterval(ticker); ticker=null;
+  clearInterval(ticker);ticker=null;
   playDone();
-  setTimeout(()=>speak('Allenamento completato!'),700);
+  setTimeout(()=>speak('Allenamento completato! Ottimo lavoro!'),700);
   const elapsed=Math.round((Date.now()-workoutStart)/1000);
-  const totalTirate=p.blocks*p.tiratePerBlock;
-  document.getElementById('doneStats').innerHTML=`
-    <div class="done-stat-row">Durata totale <span class="dsv">${fmt(elapsed)}</span></div>
-    <div class="done-stat-row">Tirate riscaldamento <span class="dsv">${p.warmRounds}</span></div>
-    <div class="done-stat-row">Blocchi allenamento <span class="dsv">${p.blocks}</span></div>
-    <div class="done-stat-row">Tirate totali <span class="dsv">${totalTirate}</span></div>
-    <div class="done-stat-row">Attacchi per tirata <span class="dsv">${p.attacks}</span></div>
-  `;
+  let statsHtml=`<div class="done-stat-row">Durata totale<span class="dsv">${fmt(elapsed)}</span></div>`;
+  if(currentMode==='res'){
+    statsHtml+=`
+      <div class="done-stat-row">Tirate riscaldamento<span class="dsv">${p.warmRounds}</span></div>
+      <div class="done-stat-row">Blocchi<span class="dsv">${p.blocks}</span></div>
+      <div class="done-stat-row">Tirate totali<span class="dsv">${p.blocks*p.tiratePerBlock}</span></div>
+    `;
+  } else {
+    const boW=realTopSet>0?round5(realTopSet*fp.fboPct/100):'-';
+    const resW=realTopSet>0?round5(realTopSet*fp.fresPct/100):'-';
+    statsHtml+=`
+      <div class="done-stat-row">Top Set<span class="dsv">${realTopSet>0?realTopSet:fp.ftsW} kg</span></div>
+      <div class="done-stat-row">Back Off<span class="dsv">${boW} kg</span></div>
+      <div class="done-stat-row">Resistenza<span class="dsv">${resW} kg</span></div>
+    `;
+  }
+  document.getElementById('doneStats').innerHTML=statsHtml;
   document.getElementById('doneScreen').classList.remove('hidden');
 }
 
 function goSetup(){
-  clearInterval(ticker); ticker=null;
-  isPaused=false;
+  clearInterval(ticker);ticker=null;isPaused=false;
   try{window.speechSynthesis.cancel();}catch(e){}
   document.getElementById('timer').classList.remove('active');
   document.getElementById('doneScreen').classList.add('hidden');
   document.getElementById('pausedOverlay').classList.add('hidden');
+  if(document.getElementById('topsetOverlay')) document.getElementById('topsetOverlay').classList.add('hidden');
   document.getElementById('setup').classList.add('active');
 }
 
@@ -635,20 +801,17 @@ function goSetup(){
 // INIT
 // ═══════════════════════════════════════
 updateSummaries();
+updateForzaPills();
+updateForzaRecap();
 
-// Block pull-to-refresh
-let lastTouchY = 0;
-document.addEventListener("touchstart", e => {
-  lastTouchY = e.touches[0].clientY;
-}, {passive: false});
-document.addEventListener("touchmove", e => {
-  const setup = document.getElementById("setup");
-  const dy = e.touches[0].clientY - lastTouchY;
-  lastTouchY = e.touches[0].clientY;
-  if(dy > 0 && setup.scrollTop <= 0) {
-    e.preventDefault();
-  }
-}, {passive: false});
+let lastTouchY=0;
+document.addEventListener('touchstart',e=>{lastTouchY=e.touches[0].clientY;},{passive:false});
+document.addEventListener('touchmove',e=>{
+  const setup=document.getElementById('setup');
+  const dy=e.touches[0].clientY-lastTouchY;
+  lastTouchY=e.touches[0].clientY;
+  if(dy>0&&setup.scrollTop<=0) e.preventDefault();
+},{passive:false});
 </script>
 </body>
 </html>
