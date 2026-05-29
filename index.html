@@ -379,7 +379,7 @@ function setMode(m){
 // ═══════════════════════════════════════
 // RESISTENZA PARAMS (unchanged)
 // ═══════════════════════════════════════
-const PROTO_DUR = 30;
+const PROTO_DUR = fp.protoDur;
 
 const p = {
   warmRounds:3, warmDuration:60, warmRecovery:60,
@@ -423,7 +423,7 @@ function updateSummaries(){
 const fp = {
   fwR:2, fwDur:45, fwRec:120,
   fb1:300,
-  ftsR:2, ftsDur:60, ftsRec:300, ftsW:400, ftsAtt:15, ftsHold:15, ftsAtk:3, ftsSingle:60,
+  ftsR:2, ftsDur:60, ftsRec:300, ftsW:400,
   fb2:300,
   fboR:3, fboRec:90, fboPct:90, fboAtt:15, fboHold:15, fboAtk:3, fboSingle:60,
   fb3:300,
@@ -433,7 +433,6 @@ const fLIMITS = {
   fwR:{min:1,max:20}, fwDur:{min:30,max:300}, fwRec:{min:60,max:300},
   fb1:{min:60,max:600},
   ftsR:{min:1,max:10}, ftsDur:{min:30,max:300}, ftsRec:{min:60,max:600}, ftsW:{min:10,max:2000},
-  ftsAtt:{min:5,max:60}, ftsHold:{min:5,max:60}, ftsAtk:{min:1,max:10}, ftsSingle:{min:30,max:300},
   fb2:{min:60,max:600},
   fboR:{min:1,max:20}, fboRec:{min:60,max:600}, fboPct:{min:10,max:100},
   fboAtt:{min:5,max:60}, fboHold:{min:5,max:60}, fboAtk:{min:1,max:10}, fboSingle:{min:30,max:300},
@@ -444,7 +443,7 @@ const fLIMITS = {
 const fUNITS = {
   fwR:'×',fwDur:'sec',fwRec:'sec',
   fb1:'sec',
-  ftsR:'×',ftsDur:'sec',ftsRec:'sec',ftsW:'kg',ftsAtt:'sec',ftsHold:'sec',ftsAtk:'×',ftsSingle:'sec',
+  ftsR:'×',ftsDur:'sec',ftsRec:'sec',ftsW:'kg',
   fb2:'sec',
   fboR:'×',fboRec:'sec',fboPct:'%',fboAtt:'sec',fboHold:'sec',fboAtk:'×',fboSingle:'sec',
   fb3:'sec',
