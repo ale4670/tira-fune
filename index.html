@@ -211,15 +211,15 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       <div class="section-card">
         <div class="section-card-title">RISCALDAMENTO</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fwR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwR',-1)">−</button><button ontouchstart="" onclick="fadjust('fwR',1)">+</button></div></div>
-        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-fwDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwDur',-5)">−</button><button ontouchstart="" onclick="fadjust('fwDur',5)">+</button></div></div>
-        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fwRec">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwRec',-10)">−</button><button ontouchstart="" onclick="fadjust('fwRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-fwDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwDur',-15)">−</button><button ontouchstart="" onclick="fadjust('fwDur',15)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fwRec">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fwRec',30)">+</button></div></div>
       </div>
     </div>
 
     <div>
       <div class="section-label">⏸ Pausa riscaldamento → top set</div>
       <div class="section-card">
-        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb1">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb1',-10)">−</button><button ontouchstart="" onclick="fadjust('fb1',10)">+</button></div></div>
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb1">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb1',-30)">−</button><button ontouchstart="" onclick="fadjust('fb1',30)">+</button></div></div>
       </div>
     </div>
 
@@ -229,18 +229,18 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       <div class="section-card">
         <div class="section-card-title">TOP SET</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-ftsR">2<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsR',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsR',1)">+</button></div></div>
-        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-ftsDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsDur',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsDur',5)">+</button></div></div>
-        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-ftsRec">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsRec',-10)">−</button><button ontouchstart="" onclick="fadjust('ftsRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-ftsDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsDur',-15)">−</button><button ontouchstart="" onclick="fadjust('ftsDur',15)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-ftsRec">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsRec',-30)">−</button><button ontouchstart="" onclick="fadjust('ftsRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Peso stimato</label><div class="param-value" id="val-ftsW">400<span class="unit">kg</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsW',-10)">−</button><button ontouchstart="" onclick="fadjust('ftsW',10)">+</button></div></div>
         <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fts" onchange="ftoggleAlt('fts')"><span class="toggle-slider"></span></label></div>
         <div id="alt-fts" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
           <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-ftsAtt">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsAtt',5)">+</button></div></div>
-          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-ftsHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsHold',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsHold',1)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-ftsHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsHold',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsHold',5)">+</button></div></div>
           <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-ftsAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsAtk',1)">+</button></div></div>
           <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fts">—</span></div>
         </div>
         <div id="single-fts">
-          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-ftsSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsSingle',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsSingle',5)">+</button></div></div>
+          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-ftsSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsSingle',-15)">−</button><button ontouchstart="" onclick="fadjust('ftsSingle',15)">+</button></div></div>
         </div>
       </div>
     </div>
@@ -248,7 +248,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     <div>
       <div class="section-label">⏸ Pausa top set → back off</div>
       <div class="section-card">
-        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb2">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb2',-10)">−</button><button ontouchstart="" onclick="fadjust('fb2',10)">+</button></div></div>
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb2">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb2',-30)">−</button><button ontouchstart="" onclick="fadjust('fb2',30)">+</button></div></div>
       </div>
     </div>
 
@@ -258,17 +258,17 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       <div class="section-card">
         <div class="section-card-title">BACK OFF</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fboR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboR',-1)">−</button><button ontouchstart="" onclick="fadjust('fboR',1)">+</button></div></div>
-        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fboRec">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboRec',-10)">−</button><button ontouchstart="" onclick="fadjust('fboRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fboRec">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fboRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fboPct">80<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fboPct',5)">+</button></div></div>
         <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fbo" onchange="ftoggleAlt('fbo')"><span class="toggle-slider"></span></label></div>
         <div id="alt-fbo" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
           <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-fboAtt">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('fboAtt',5)">+</button></div></div>
-          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fboHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboHold',-1)">−</button><button ontouchstart="" onclick="fadjust('fboHold',1)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fboHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboHold',-5)">−</button><button ontouchstart="" onclick="fadjust('fboHold',5)">+</button></div></div>
           <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-fboAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('fboAtk',1)">+</button></div></div>
           <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fbo">—</span></div>
         </div>
         <div id="single-fbo">
-          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fboSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboSingle',-5)">−</button><button ontouchstart="" onclick="fadjust('fboSingle',5)">+</button></div></div>
+          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fboSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboSingle',-15)">−</button><button ontouchstart="" onclick="fadjust('fboSingle',15)">+</button></div></div>
         </div>
       </div>
     </div>
@@ -276,7 +276,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     <div>
       <div class="section-label">⏸ Pausa back off → resistenza</div>
       <div class="section-card">
-        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb3">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb3',-10)">−</button><button ontouchstart="" onclick="fadjust('fb3',10)">+</button></div></div>
+        <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb3">180<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb3',-30)">−</button><button ontouchstart="" onclick="fadjust('fb3',30)">+</button></div></div>
       </div>
     </div>
 
@@ -286,17 +286,17 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       <div class="section-card">
         <div class="section-card-title">RESISTENZA</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fresR">4<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresR',-1)">−</button><button ontouchstart="" onclick="fadjust('fresR',1)">+</button></div></div>
-        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fresRec">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresRec',-10)">−</button><button ontouchstart="" onclick="fadjust('fresRec',10)">+</button></div></div>
+        <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fresRec">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fresRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fresPct">70<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fresPct',5)">+</button></div></div>
         <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fres" onchange="ftoggleAlt('fres')"><span class="toggle-slider"></span></label></div>
         <div id="alt-fres" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
           <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-fresAtt">30<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('fresAtt',5)">+</button></div></div>
-          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fresHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresHold',-1)">−</button><button ontouchstart="" onclick="fadjust('fresHold',1)">+</button></div></div>
+          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fresHold">10<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresHold',-5)">−</button><button ontouchstart="" onclick="fadjust('fresHold',5)">+</button></div></div>
           <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-fresAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('fresAtk',1)">+</button></div></div>
           <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fres">—</span></div>
         </div>
         <div id="single-fres">
-          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fresSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresSingle',-5)">−</button><button ontouchstart="" onclick="fadjust('fresSingle',5)">+</button></div></div>
+          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fresSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresSingle',-15)">−</button><button ontouchstart="" onclick="fadjust('fresSingle',15)">+</button></div></div>
         </div>
       </div>
     </div>
@@ -421,25 +421,25 @@ function updateSummaries(){
 // FORZA PARAMS
 // ═══════════════════════════════════════
 const fp = {
-  fwR:3, fwDur:60, fwRec:60,
-  fb1:120,
-  ftsR:2, ftsDur:60, ftsRec:120, ftsW:400, ftsAtt:30, ftsHold:10, ftsAtk:3, ftsSingle:60,
-  fb2:180,
-  fboR:3, fboRec:90, fboPct:80, fboAtt:30, fboHold:10, fboAtk:3, fboSingle:60,
-  fb3:180,
-  fresR:4, fresRec:90, fresPct:70, fresAtt:30, fresHold:10, fresAtk:3, fresSingle:60,
+  fwR:2, fwDur:45, fwRec:120,
+  fb1:300,
+  ftsR:2, ftsDur:60, ftsRec:300, ftsW:400, ftsAtt:15, ftsHold:15, ftsAtk:3, ftsSingle:60,
+  fb2:300,
+  fboR:3, fboRec:90, fboPct:90, fboAtt:15, fboHold:15, fboAtk:3, fboSingle:60,
+  fb3:300,
+  fresR:3, fresRec:300, fresPct:90, fresAtt:15, fresHold:15, fresAtk:3, fresSingle:60,
 };
 const fLIMITS = {
-  fwR:{min:1,max:20}, fwDur:{min:10,max:300}, fwRec:{min:10,max:300},
-  fb1:{min:10,max:600},
-  ftsR:{min:1,max:10}, ftsDur:{min:10,max:300}, ftsRec:{min:10,max:600}, ftsW:{min:10,max:2000},
-  ftsAtt:{min:5,max:180}, ftsHold:{min:3,max:60}, ftsAtk:{min:1,max:10}, ftsSingle:{min:10,max:300},
-  fb2:{min:10,max:600},
-  fboR:{min:1,max:20}, fboRec:{min:10,max:600}, fboPct:{min:10,max:100},
-  fboAtt:{min:5,max:180}, fboHold:{min:3,max:60}, fboAtk:{min:1,max:10}, fboSingle:{min:10,max:300},
-  fb3:{min:10,max:600},
-  fresR:{min:1,max:20}, fresRec:{min:10,max:600}, fresPct:{min:10,max:100},
-  fresAtt:{min:5,max:180}, fresHold:{min:3,max:60}, fresAtk:{min:1,max:10}, fresSingle:{min:10,max:300},
+  fwR:{min:1,max:20}, fwDur:{min:30,max:300}, fwRec:{min:60,max:300},
+  fb1:{min:60,max:600},
+  ftsR:{min:1,max:10}, ftsDur:{min:30,max:300}, ftsRec:{min:60,max:600}, ftsW:{min:10,max:2000},
+  ftsAtt:{min:5,max:60}, ftsHold:{min:5,max:60}, ftsAtk:{min:1,max:10}, ftsSingle:{min:30,max:300},
+  fb2:{min:60,max:600},
+  fboR:{min:1,max:20}, fboRec:{min:60,max:600}, fboPct:{min:10,max:100},
+  fboAtt:{min:5,max:60}, fboHold:{min:5,max:60}, fboAtk:{min:1,max:10}, fboSingle:{min:30,max:300},
+  fb3:{min:60,max:600},
+  fresR:{min:1,max:20}, fresRec:{min:60,max:600}, fresPct:{min:10,max:100},
+  fresAtt:{min:5,max:60}, fresHold:{min:5,max:60}, fresAtk:{min:1,max:10}, fresSingle:{min:30,max:300},
 };
 const fUNITS = {
   fwR:'×',fwDur:'sec',fwRec:'sec',
