@@ -10,36 +10,24 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tira la Fune">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<script>
-  if('serviceWorker' in navigator){
-    window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
-  }
-</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));}</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0a0f;--card:#14141c;--border:#2a2a3a;
-  --text:#f0f0f5;--muted:#5a5a72;--accent:#ff3a3a;--warm:#f0b800;
-}
+:root{--bg:#0a0a0f;--card:#14141c;--border:#2a2a3a;--text:#f0f0f5;--muted:#5a5a72;--accent:#ff3a3a;--warm:#f0b800;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden;overscroll-behavior:none;}
 .screen{display:none;flex-direction:column;}
 .screen.active{display:flex;}
-
-/* ══ SETUP ══ */
 #setup{height:100dvh;overflow-y:auto;overflow-x:hidden;padding:calc(24px + env(safe-area-inset-top)) 18px calc(60px + env(safe-area-inset-bottom));gap:15px;}
 .app-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,10vw,3.6rem);letter-spacing:4px;text-align:center;line-height:1;}
 .app-title span{color:var(--accent);}
 .app-sub{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:5px;color:var(--muted);text-align:center;margin-top:2px;}
-
 .mode-tabs{display:flex;gap:8px;}
 .mode-tab{flex:1;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;cursor:pointer;text-align:center;transition:all .15s;}
 .mode-tab.active{background:var(--accent);border-color:var(--accent);color:white;}
-
 .section-label{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
 .section-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:13px 14px;display:flex;flex-direction:column;gap:9px;}
 .section-card-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:7px;margin-bottom:2px;}
-
 .param-box{background:var(--bg);border:1px solid var(--border);border-radius:13px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .param-info{display:flex;flex-direction:column;gap:1px;flex:1;}
 .param-info label{font-size:.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
@@ -48,16 +36,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .stepper{display:flex;gap:8px;align-items:center;flex-shrink:0;}
 .stepper button{width:50px;height:50px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:1.6rem;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s,transform .1s;user-select:none;-webkit-user-select:none;}
 .stepper button:active{background:var(--accent);transform:scale(.92);}
-
 .name-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .name-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:11px 13px;display:flex;flex-direction:column;gap:5px;}
 .name-box label{font-size:.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
 .name-box input{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;width:100%;outline:none;padding-bottom:3px;}
-
 .info-pill{background:rgba(240,184,0,.08);border:1px solid rgba(240,184,0,.2);border-radius:10px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;font-size:.88rem;color:rgba(240,184,0,.7);}
 .info-pill .pill-val{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--warm);}
-
-/* Toggle switch */
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:6px 4px;}
 .toggle-label{font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);}
 .toggle{position:relative;width:48px;height:26px;flex-shrink:0;}
@@ -66,41 +50,28 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:var(--muted);border-radius:50%;transition:.3s;}
 .toggle input:checked+.toggle-slider{background:var(--accent);}
 .toggle input:checked+.toggle-slider:before{transform:translateX(22px);background:white;}
-
-/* Recap */
+.proto-box{background:rgba(240,184,0,.06);border:1px solid rgba(240,184,0,.2);border-radius:13px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .recap-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;}
-.recap-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:6px;}
-.recap-row{display:flex;justify-content:space-between;align-items:center;font-size:.88rem;color:var(--muted);padding:2px 0;}
-.recap-row .rv{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);}
-.recap-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:7px;margin-top:2px;}
+.recap-total{display:flex;justify-content:space-between;align-items:center;}
 .recap-total span{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--accent);}
-
 .start-btn{background:var(--accent);color:white;border:none;border-radius:18px;padding:21px;font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:4px;width:100%;cursor:pointer;box-shadow:0 8px 32px rgba(255,58,58,.4);transition:transform .1s;margin-top:4px;}
 .start-btn:active{transform:scale(.97);}
-
-/* ══ TIMER ══ */
 #timer{position:fixed;inset:0;overflow:hidden;}
 .timer-bg{position:absolute;inset:0;z-index:0;transition:background .4s ease;}
 .timer-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;height:100dvh;padding:calc(16px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));overflow:hidden;}
-
 .timer-top{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .round-badge{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1.5px;background:rgba(0,0,0,.3);padding:7px 14px;border-radius:30px;color:white;text-align:center;line-height:1.35;flex:1;}
 .top-btns{display:flex;gap:8px;flex-shrink:0;}
 .icon-btn{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);color:white;border-radius:30px;padding:7px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;}
 .icon-btn:active{background:rgba(0,0,0,.55);}
-
 .weight-display{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:7px 14px;color:white;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;}
-
 .timer-center{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;}
 .phase-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,6vw,2rem);letter-spacing:5px;color:white;text-shadow:0 2px 20px rgba(0,0,0,.5);}
 .team-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,10vw,3.5rem);letter-spacing:4px;color:white;text-shadow:0 4px 24px rgba(0,0,0,.45);line-height:1;}
 .big-timer{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,30vw,10rem);color:white;text-shadow:0 8px 40px rgba(0,0,0,.45);line-height:.9;}
-
 .paused-overlay{position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
 .paused-label{font-family:'Bebas Neue',sans-serif;font-size:4rem;letter-spacing:6px;color:white;}
 .resume-btn{background:var(--accent);color:white;border:none;border-radius:16px;padding:18px 48px;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:3px;cursor:pointer;}
-
-/* Top Set overlay */
 .topset-overlay{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;}
 .topset-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:4px;color:white;text-align:center;line-height:1.2;}
 .topset-sub{font-size:.95rem;color:var(--muted);text-align:center;}
@@ -111,7 +82,6 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .topset-calc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;width:100%;display:flex;flex-direction:column;gap:8px;}
 .topset-calc-row{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted);}
 .topset-calc-row .tcv{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--warm);}
-
 .timer-bottom{width:100%;display:flex;flex-direction:column;gap:12px;align-items:center;}
 .progress-wrap{width:100%;height:8px;background:rgba(0,0,0,.3);border-radius:4px;overflow:hidden;}
 .progress-fill{height:100%;border-radius:4px;background:rgba(255,255,255,.65);transition:width .3s linear;}
@@ -119,7 +89,6 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .phase-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .2s,box-shadow .2s;}
 .phase-dot.done{background:rgba(255,255,255,.55);}
 .phase-dot.current{background:white;box-shadow:0 0 8px white;}
-
 .done-screen{position:fixed;inset:0;z-index:20;background:#0d1b2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:calc(36px + env(safe-area-inset-top)) 36px calc(36px + env(safe-area-inset-bottom));}
 .done-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,13vw,4.5rem);color:white;letter-spacing:5px;text-align:center;line-height:1.1;}
 .done-stats{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;width:100%;display:flex;flex-direction:column;gap:0;}
@@ -132,15 +101,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 </head>
 <body>
 
-<!-- ═══════════════ SETUP ═══════════════ -->
 <div id="setup" class="screen active">
-
   <div>
     <div class="app-title">TIRA LA <span>FUNE</span></div>
     <div class="app-sub">COMPETITION TIMER</div>
   </div>
 
-  <!-- MODE TABS -->
   <div>
     <div class="section-label">🏋️ Tipo allenamento</div>
     <div class="mode-tabs">
@@ -149,7 +115,21 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
   </div>
 
-  <!-- Squadre (shared) -->
+  <!-- PROTOCOLLO GLOBALE -->
+  <div>
+    <div class="section-label">⏱ Protocollo (globale)</div>
+    <div class="section-card">
+      <div class="proto-box">
+        <div class="param-info"><label>Durata protocollo</label><div class="param-value" id="val-protoDur">30<span class="unit">sec</span></div></div>
+        <div class="stepper">
+          <button ontouchstart="" onclick="adjustProto(-5)">−</button>
+          <button ontouchstart="" onclick="adjustProto(5)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Squadre -->
   <div>
     <div class="section-label">🏷 Squadre</div>
     <div class="name-row">
@@ -158,10 +138,8 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
   </div>
 
-  <!-- ══════════ RESISTENZA SETUP ══════════ -->
+  <!-- RESISTENZA -->
   <div id="mode-res">
-
-    <!-- RISCALDAMENTO -->
     <div style="display:flex;flex-direction:column;gap:15px;">
     <div>
       <div class="section-label">🔥 Riscaldamento</div>
@@ -172,14 +150,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-warmRecovery">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmRecovery',-5)">−</button><button ontouchstart="" onclick="adjust('warmRecovery',5)">+</button></div></div>
       </div>
     </div>
-
     <div>
       <div class="section-label">⏸ Pausa post-riscaldamento</div>
       <div class="section-card">
         <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-midBreak">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('midBreak',-10)">−</button><button ontouchstart="" onclick="adjust('midBreak',10)">+</button></div></div>
       </div>
     </div>
-
     <div>
       <div class="section-label">⚡ Allenamento</div>
       <div class="section-card">
@@ -198,14 +174,11 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       </div>
     </div>
     </div>
+  </div>
 
-  </div><!-- end mode-res -->
-
-  <!-- ══════════ FORZA SETUP ══════════ -->
+  <!-- FORZA -->
   <div id="mode-for" class="hidden">
     <div style="display:flex;flex-direction:column;gap:15px;">
-
-    <!-- Riscaldamento forza -->
     <div>
       <div class="section-label">🔥 Riscaldamento</div>
       <div class="section-card">
@@ -215,15 +188,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fwRec">120<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fwRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fwRec',30)">+</button></div></div>
       </div>
     </div>
-
     <div>
       <div class="section-label">⏸ Pausa riscaldamento → top set</div>
       <div class="section-card">
         <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb1">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb1',-30)">−</button><button ontouchstart="" onclick="fadjust('fb1',30)">+</button></div></div>
       </div>
     </div>
-
-    <!-- Top Set -->
     <div>
       <div class="section-label">🏆 Top Set</div>
       <div class="section-card">
@@ -232,27 +202,14 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
         <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-ftsDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsDur',-15)">−</button><button ontouchstart="" onclick="fadjust('ftsDur',15)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-ftsRec">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsRec',-30)">−</button><button ontouchstart="" onclick="fadjust('ftsRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Peso stimato</label><div class="param-value" id="val-ftsW">400<span class="unit">kg</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsW',-10)">−</button><button ontouchstart="" onclick="fadjust('ftsW',10)">+</button></div></div>
-        <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fts" onchange="ftoggleAlt('fts')"><span class="toggle-slider"></span></label></div>
-        <div id="alt-fts" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
-          <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-ftsAtt">15<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsAtt',5)">+</button></div></div>
-          <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-ftsHold">15<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsHold',-5)">−</button><button ontouchstart="" onclick="fadjust('ftsHold',5)">+</button></div></div>
-          <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-ftsAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsAtk',1)">+</button></div></div>
-          <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fts">—</span></div>
-        </div>
-        <div id="single-fts">
-          <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-ftsSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsSingle',-15)">−</button><button ontouchstart="" onclick="fadjust('ftsSingle',15)">+</button></div></div>
-        </div>
       </div>
     </div>
-
     <div>
       <div class="section-label">⏸ Pausa top set → back off</div>
       <div class="section-card">
         <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb2">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb2',-30)">−</button><button ontouchstart="" onclick="fadjust('fb2',30)">+</button></div></div>
       </div>
     </div>
-
-    <!-- Back Off -->
     <div>
       <div class="section-label">💪 Back Off</div>
       <div class="section-card">
@@ -272,15 +229,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
         </div>
       </div>
     </div>
-
     <div>
       <div class="section-label">⏸ Pausa back off → resistenza</div>
       <div class="section-card">
         <div class="param-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Durata pausa</label><div class="param-value" id="val-fb3">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fb3',-30)">−</button><button ontouchstart="" onclick="fadjust('fb3',30)">+</button></div></div>
       </div>
     </div>
-
-    <!-- Resistenza forza -->
     <div>
       <div class="section-label">🔁 Resistenza</div>
       <div class="section-card">
@@ -288,40 +242,34 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fresR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresR',-1)">−</button><button ontouchstart="" onclick="fadjust('fresR',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fresRec">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fresRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fresPct">90<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fresPct',5)">+</button></div></div>
-        <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fres" onchange="ftoggleAlt('fres')"><span class="toggle-slider"></span></label></div>
-        <div id="alt-fres" class="hidden" style="display:flex;flex-direction:column;gap:7px;">
+        <div class="toggle-row"><span class="toggle-label">⚡ Tirata alternata (A/B)</span><label class="toggle"><input type="checkbox" id="tog-fres" checked onchange="ftoggleAlt('fres')"><span class="toggle-slider"></span></label></div>
+        <div id="alt-fres" style="display:flex;flex-direction:column;gap:7px;">
           <div class="param-box"><div class="param-info"><label>Durata attacco</label><div class="param-value" id="val-fresAtt">15<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresAtt',-5)">−</button><button ontouchstart="" onclick="fadjust('fresAtt',5)">+</button></div></div>
           <div class="param-box"><div class="param-info"><label>Durata tenuta</label><div class="param-value" id="val-fresHold">15<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresHold',-5)">−</button><button ontouchstart="" onclick="fadjust('fresHold',5)">+</button></div></div>
           <div class="param-box"><div class="param-info"><label>Numero attacchi</label><div class="param-value" id="val-fresAtk">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresAtk',-1)">−</button><button ontouchstart="" onclick="fadjust('fresAtk',1)">+</button></div></div>
           <div class="info-pill"><span>Durata tirata</span><span class="pill-val" id="pill-fres">—</span></div>
         </div>
-        <div id="single-fres">
+        <div id="single-fres" class="hidden">
           <div class="param-box" style="margin-top:2px;"><div class="param-info"><label>Durata tirata singola</label><div class="param-value" id="val-fresSingle">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresSingle',-15)">−</button><button ontouchstart="" onclick="fadjust('fresSingle',15)">+</button></div></div>
         </div>
       </div>
     </div>
-
-    <!-- Recap forza -->
     <div>
       <div class="section-label">📋 Recap allenamento</div>
       <div class="recap-box" id="recapForza"></div>
     </div>
-
     </div>
-  </div><!-- end mode-for -->
+  </div>
 
   <button class="start-btn" onclick="startWorkout()">🚀 INIZIA</button>
 </div>
 
-<!-- ═══════════════ TIMER ═══════════════ -->
 <div id="timer" class="screen">
   <div class="timer-bg" id="timerBg"></div>
-
   <div id="pausedOverlay" class="paused-overlay hidden">
     <div class="paused-label">⏸ PAUSA</div>
     <button class="resume-btn" onclick="togglePause()">▶ RIPRENDI</button>
   </div>
-
   <div id="topsetOverlay" class="topset-overlay hidden">
     <div class="topset-title">FINE TOP SET<br>INSERISCI PESO REALE</div>
     <div class="topset-sub">Calcola automaticamente Back Off e Resistenza</div>
@@ -332,7 +280,6 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     <div class="topset-calc" id="topsetCalc"></div>
     <button class="topset-confirm" onclick="confirmTopSet()">✓ CONFERMA E CONTINUA</button>
   </div>
-
   <div class="timer-content">
     <div class="timer-top">
       <div class="round-badge" id="roundBadge">—</div>
@@ -344,15 +291,14 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
     <div class="timer-center">
       <div class="phase-label" id="phaseLabel">—</div>
-      <div class="team-name"   id="teamName">—</div>
-      <div class="big-timer"   id="bigTimer">—</div>
+      <div class="team-name" id="teamName">—</div>
+      <div class="big-timer" id="bigTimer">—</div>
     </div>
     <div class="timer-bottom">
       <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:100%"></div></div>
       <div class="phase-dots" id="phaseDots"></div>
     </div>
   </div>
-
   <div id="doneScreen" class="done-screen hidden">
     <div style="font-size:3.5rem">🏆</div>
     <div class="done-title">ALLENAMENTO<br>COMPLETATO!</div>
@@ -362,387 +308,244 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 </div>
 
 <script>
-// ═══════════════════════════════════════
-// MODE
-// ═══════════════════════════════════════
-let currentMode = 'res'; // 'res' | 'for'
-
+let currentMode='res';
 function setMode(m){
-  currentMode = m;
-  document.getElementById('tab-res').classList.toggle('active', m==='res');
-  document.getElementById('tab-for').classList.toggle('active', m==='for');
-  document.getElementById('mode-res').classList.toggle('hidden', m!=='res');
-  document.getElementById('mode-for').classList.toggle('hidden', m!=='for');
+  currentMode=m;
+  document.getElementById('tab-res').classList.toggle('active',m==='res');
+  document.getElementById('tab-for').classList.toggle('active',m==='for');
+  document.getElementById('mode-res').classList.toggle('hidden',m!=='res');
+  document.getElementById('mode-for').classList.toggle('hidden',m!=='for');
   if(m==='for') updateForzaRecap();
 }
 
-// ═══════════════════════════════════════
-// RESISTENZA PARAMS (unchanged)
-// ═══════════════════════════════════════
-const PROTO_DUR = fp.protoDur;
+let PROTO_DUR=30;
+function adjustProto(delta){
+  PROTO_DUR=Math.max(10,Math.min(60,PROTO_DUR+delta));
+  document.getElementById('val-protoDur').innerHTML=PROTO_DUR+'<span class="unit">sec</span>';
+  updateSummaries();updateForzaRecap();
+}
 
-const p = {
-  warmRounds:3, warmDuration:60, warmRecovery:60,
-  midBreak:120,
-  blocks:3, tiratePerBlock:3, trainRecovery:90, blockRecovery:180,
-  attacks:3, attackDur:30, holdDur:10,
-};
-const LIMITS = {
-  warmRounds:{min:1,max:20}, warmDuration:{min:10,max:300}, warmRecovery:{min:10,max:300},
-  midBreak:{min:10,max:600},
-  blocks:{min:1,max:10}, tiratePerBlock:{min:1,max:20},
-  trainRecovery:{min:10,max:600}, blockRecovery:{min:10,max:600},
-  attacks:{min:1,max:10}, attackDur:{min:5,max:180}, holdDur:{min:3,max:60},
-};
-const UNITS = {
-  warmRounds:'×',warmDuration:'sec',warmRecovery:'sec',
-  midBreak:'sec',blocks:'×',tiratePerBlock:'×',
-  trainRecovery:'sec',blockRecovery:'sec',
-  attacks:'×',attackDur:'sec',holdDur:'sec',
-};
+const p={warmRounds:3,warmDuration:60,warmRecovery:60,midBreak:120,blocks:3,tiratePerBlock:3,trainRecovery:90,blockRecovery:180,attacks:3,attackDur:30,holdDur:10};
+const LIMITS={warmRounds:{min:1,max:20},warmDuration:{min:10,max:300},warmRecovery:{min:10,max:300},midBreak:{min:10,max:600},blocks:{min:1,max:10},tiratePerBlock:{min:1,max:20},trainRecovery:{min:10,max:600},blockRecovery:{min:10,max:600},attacks:{min:1,max:10},attackDur:{min:5,max:180},holdDur:{min:3,max:60}};
+const UNITS={warmRounds:'x',warmDuration:'sec',warmRecovery:'sec',midBreak:'sec',blocks:'x',tiratePerBlock:'x',trainRecovery:'sec',blockRecovery:'sec',attacks:'x',attackDur:'sec',holdDur:'sec'};
 
 function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
-function fmt(s){const m=Math.floor(s/60),sc=s%60;return m>0?(sc>0?`${m}m ${sc}s`:`${m}m`):`${s}s`;}
+function fmt(s){const m=Math.floor(s/60),sc=s%60;return m>0?(sc>0?m+'m '+sc+'s':m+'m'):s+'s';}
 function round5(v){return Math.round(v/5)*5;}
 
 function adjust(key,delta){
-  const {min,max}=LIMITS[key];
-  p[key]=clamp(p[key]+delta,min,max);
-  document.getElementById(`val-${key}`).innerHTML=`${p[key]}<span class="unit">${UNITS[key]}</span>`;
+  const{min,max}=LIMITS[key];p[key]=clamp(p[key]+delta,min,max);
+  document.getElementById('val-'+key).innerHTML=p[key]+'<span class="unit">'+UNITS[key]+'</span>';
   updateSummaries();
 }
 function updateSummaries(){
-  const tirataS = p.attacks*(p.holdDur+p.attackDur);
-  document.getElementById('pill-tiratadur').textContent = fmt(tirataS);
-  document.getElementById('pill-tirateTotal').textContent = (p.blocks*p.tiratePerBlock)+' tirate';
+  document.getElementById('pill-tiratadur').textContent=fmt(p.attacks*(p.holdDur+p.attackDur));
+  document.getElementById('pill-tirateTotal').textContent=(p.blocks*p.tiratePerBlock)+' tirate';
 }
 
-// ═══════════════════════════════════════
-// FORZA PARAMS
-// ═══════════════════════════════════════
-const fp = {
-  fwR:2, fwDur:45, fwRec:120,
-  fb1:300,
-  ftsR:2, ftsDur:60, ftsRec:300, ftsW:400,
-  fb2:300,
-  fboR:3, fboRec:90, fboPct:90, fboAtt:15, fboHold:15, fboAtk:3, fboSingle:60,
-  fb3:300,
-  fresR:3, fresRec:300, fresPct:90, fresAtt:15, fresHold:15, fresAtk:3, fresSingle:60,
-};
-const fLIMITS = {
-  fwR:{min:1,max:20}, fwDur:{min:30,max:300}, fwRec:{min:60,max:300},
-  fb1:{min:60,max:600},
-  ftsR:{min:1,max:10}, ftsDur:{min:30,max:300}, ftsRec:{min:60,max:600}, ftsW:{min:10,max:2000},
-  fb2:{min:60,max:600},
-  fboR:{min:1,max:20}, fboRec:{min:60,max:600}, fboPct:{min:10,max:100},
-  fboAtt:{min:5,max:60}, fboHold:{min:5,max:60}, fboAtk:{min:1,max:10}, fboSingle:{min:30,max:300},
-  fb3:{min:60,max:600},
-  fresR:{min:1,max:20}, fresRec:{min:60,max:600}, fresPct:{min:10,max:100},
-  fresAtt:{min:5,max:60}, fresHold:{min:5,max:60}, fresAtk:{min:1,max:10}, fresSingle:{min:30,max:300},
-};
-const fUNITS = {
-  fwR:'×',fwDur:'sec',fwRec:'sec',
-  fb1:'sec',
-  ftsR:'×',ftsDur:'sec',ftsRec:'sec',ftsW:'kg',
-  fb2:'sec',
-  fboR:'×',fboRec:'sec',fboPct:'%',fboAtt:'sec',fboHold:'sec',fboAtk:'×',fboSingle:'sec',
-  fb3:'sec',
-  fresR:'×',fresRec:'sec',fresPct:'%',fresAtt:'sec',fresHold:'sec',fresAtk:'×',fresSingle:'sec',
-};
-
-const fAltMode = {fts:false, fbo:false, fres:false};
+const fp={fwR:2,fwDur:45,fwRec:120,fb1:300,ftsR:2,ftsDur:60,ftsRec:300,ftsW:400,fb2:300,fboR:3,fboRec:300,fboPct:90,fboAtt:15,fboHold:15,fboAtk:3,fboSingle:60,fb3:300,fresR:3,fresRec:300,fresPct:90,fresAtt:15,fresHold:15,fresAtk:3,fresSingle:60};
+const fLIMITS={fwR:{min:1,max:20},fwDur:{min:15,max:300},fwRec:{min:30,max:600},fb1:{min:30,max:600},ftsR:{min:1,max:10},ftsDur:{min:15,max:300},ftsRec:{min:30,max:600},ftsW:{min:10,max:2000},fb2:{min:30,max:600},fboR:{min:1,max:20},fboRec:{min:30,max:600},fboPct:{min:10,max:100},fboAtt:{min:5,max:60},fboHold:{min:5,max:60},fboAtk:{min:1,max:10},fboSingle:{min:15,max:300},fb3:{min:30,max:600},fresR:{min:1,max:20},fresRec:{min:30,max:600},fresPct:{min:10,max:100},fresAtt:{min:5,max:60},fresHold:{min:5,max:60},fresAtk:{min:1,max:10},fresSingle:{min:15,max:300}};
+const fUNITS={fwR:'x',fwDur:'sec',fwRec:'sec',fb1:'sec',ftsR:'x',ftsDur:'sec',ftsRec:'sec',ftsW:'kg',fb2:'sec',fboR:'x',fboRec:'sec',fboPct:'%',fboAtt:'sec',fboHold:'sec',fboAtk:'x',fboSingle:'sec',fb3:'sec',fresR:'x',fresRec:'sec',fresPct:'%',fresAtt:'sec',fresHold:'sec',fresAtk:'x',fresSingle:'sec'};
+const fAltMode={fbo:false,fres:true};
 
 function fadjust(key,delta){
-  const {min,max}=fLIMITS[key];
-  fp[key]=clamp(fp[key]+delta,min,max);
-  document.getElementById(`val-${key}`).innerHTML=`${fp[key]}<span class="unit">${fUNITS[key]}</span>`;
-  updateForzaPills();
-  updateForzaRecap();
+  const{min,max}=fLIMITS[key];fp[key]=clamp(fp[key]+delta,min,max);
+  document.getElementById('val-'+key).innerHTML=fp[key]+'<span class="unit">'+fUNITS[key]+'</span>';
+  updateForzaPills();updateForzaRecap();
 }
-
 function ftoggleAlt(block){
-  fAltMode[block] = document.getElementById(`tog-${block}`).checked;
-  document.getElementById(`alt-${block}`).classList.toggle('hidden', !fAltMode[block]);
-  document.getElementById(`single-${block}`).classList.toggle('hidden', fAltMode[block]);
-  updateForzaPills();
-  updateForzaRecap();
+  fAltMode[block]=document.getElementById('tog-'+block).checked;
+  document.getElementById('alt-'+block).classList.toggle('hidden',!fAltMode[block]);
+  document.getElementById('single-'+block).classList.toggle('hidden',fAltMode[block]);
+  updateForzaPills();updateForzaRecap();
 }
-
 function fTirataDur(block){
   if(fAltMode[block]){
-    const pre = block==='fts'?'fts':block==='fbo'?'fbo':'fres';
-    return fp[`${pre}Atk`]*(fp[`${pre}Hold`]+fp[`${pre}Att`]);
-  } else {
-    const pre = block==='fts'?'ftsSingle':block==='fbo'?'fboSingle':'fresSingle';
-    return fp[pre];
+    const pre=block;
+    return fp[pre+'Atk']*(fp[pre+'Hold']+fp[pre+'Att']);
   }
+  return fp[block+'Single'];
 }
-
 function updateForzaPills(){
-  ['fts','fbo','fres'].forEach(b=>{
-    const el=document.getElementById(`pill-${b}`);
-    if(el) el.textContent=fmt(fTirataDur(b));
-  });
+  ['fbo','fres'].forEach(function(b){var el=document.getElementById('pill-'+b);if(el)el.textContent=fmt(fTirataDur(b));});
 }
-
-function blockTotalDur(nTirate, tirSec, recSec){
-  return nTirate*(PROTO_DUR+tirSec)+(nTirate-1)*recSec;
-}
-
+function blockTotalDur(n,tirSec,recSec){return n*(PROTO_DUR+tirSec)+(n-1)*recSec;}
 function updateForzaRecap(){
-  const wDur  = fp.fwDur;
-  const tsDur = fTirataDur('fts');
-  const boDur = fTirataDur('fbo');
-  const rDur  = fTirataDur('fres');
-  const wTotal  = blockTotalDur(fp.fwR,  wDur,  fp.fwRec);
-  const tsTotal = blockTotalDur(fp.ftsR, tsDur, fp.ftsRec);
-  const boTotal = blockTotalDur(fp.fboR, boDur, fp.fboRec);
-  const rTotal  = blockTotalDur(fp.fresR, rDur, fp.fresRec);
-  const grand   = wTotal+fp.fb1+tsTotal+fp.fb2+boTotal+fp.fb3+rTotal;
-  const boW  = round5(fp.ftsW*fp.fboPct/100);
-  const resW = round5(fp.ftsW*fp.fresPct/100);
-  document.getElementById('recapForza').innerHTML=`
-    <div class="recap-total">TOTALE STIMATO <span>${fmt(grand)}</span></div>
-  `;
+  var grand=blockTotalDur(fp.fwR,fp.fwDur,fp.fwRec)+fp.fb1+blockTotalDur(fp.ftsR,fp.ftsDur,fp.ftsRec)+fp.fb2+blockTotalDur(fp.fboR,fTirataDur('fbo'),fp.fboRec)+fp.fb3+blockTotalDur(fp.fresR,fTirataDur('fres'),fp.fresRec);
+  document.getElementById('recapForza').innerHTML='<div class="recap-total">TOTALE STIMATO <span>'+fmt(grand)+'</span></div>';
 }
 
-// ═══════════════════════════════════════
-// AUDIO
-// ═══════════════════════════════════════
 let audioCtx=null;
 function getAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
-function beep(freq,dur,type,vol){type=type||'sine';vol=vol||0.5;try{const c=getAudio(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
+function beep(freq,dur,type,vol){type=type||'sine';vol=vol||0.5;try{var c=getAudio(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);o.start(c.currentTime);o.stop(c.currentTime+dur);}catch(e){}}
 function playTick(){beep(700,0.08,'sine',0.35);}
-function playPhaseEnd(){beep(880,0.12,'sine',0.5);setTimeout(()=>beep(880,0.12,'sine',0.5),220);}
-function playAttackStart(){beep(1000,0.08,'square',0.4);setTimeout(()=>beep(1200,0.15,'square',0.45),80);}
-function playDone(){[0,250,500,800].forEach((d,i)=>setTimeout(()=>beep(440+i*110,0.3,'sine',0.5),d));}
+function playPhaseEnd(){beep(880,0.12,'sine',0.5);setTimeout(function(){beep(880,0.12,'sine',0.5);},220);}
+function playAttackStart(){beep(1000,0.08,'square',0.4);setTimeout(function(){beep(1200,0.15,'square',0.45);},80);}
+function playDone(){[0,250,500,800].forEach(function(d,i){setTimeout(function(){beep(440+i*110,0.3,'sine',0.5);},d);});}
 
-// ═══════════════════════════════════════
-// SPEECH
-// ═══════════════════════════════════════
-function speak(text){try{window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='it-IT';u.rate=0.95;u.pitch=1.05;window.speechSynthesis.speak(u);}catch(e){}}
-
+function speak(text){try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='it-IT';u.rate=0.95;u.pitch=1.05;window.speechSynthesis.speak(u);}catch(e){}}
 function voiceForPhase(type,extra){
-  switch(type){
-    case 'proto':        speak('Protocollo'); break;
-    case 'warm':         speak("Let's go");  break;
-    case 'single':       speak("Let's go");  break;
-    case 'warmrec':      break;
-    case 'midbreak':     speak('Fine riscaldamento'); break;
-    case 'break':        speak('Pausa'); break;
-    case 'attack_A':     speak(extra); break;
-    case 'attack_B':     speak(extra); break;
-    case 'hold':         speak('Tenuta'); break;
-    case 'recovery':     speak('Recupero'); break;
-    case 'blockrecovery':speak('Recupero'); break;
-    case 'topset_input': break;
-  }
+  if(type==='proto')speak('Protocollo');
+  else if(type==='warm'||type==='single')speak("Let's go");
+  else if(type==='midbreak')speak('Fine riscaldamento');
+  else if(type==='break')speak('Pausa');
+  else if(type==='attack_A'||type==='attack_B')speak(extra);
+  else if(type==='hold')speak('Tenuta');
+  else if(type==='recovery'||type==='blockrecovery')speak('Recupero');
 }
 
-// ═══════════════════════════════════════
-// COLORS
-// ═══════════════════════════════════════
-const COLORS = {
-  proto:        'linear-gradient(160deg,#8a6200 0%,#f0b800 100%)',
-  warm:         'linear-gradient(160deg,#126030 0%,#20c060 100%)',
-  single:       'linear-gradient(160deg,#126030 0%,#20c060 100%)',
-  warmrec:      'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',
-  midbreak:     'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',
-  break:        'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',
-  hold:         'linear-gradient(160deg,#906000 0%,#d4a017 100%)',
-  attack_A:     'linear-gradient(160deg,#c02800 0%,#ff5030 100%)',
-  attack_B:     'linear-gradient(160deg,#0038b0 0%,#3090ff 100%)',
-  recovery:     'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',
-  blockrecovery:'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',
-  topset_input: 'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',
-};
+const COLORS={proto:'linear-gradient(160deg,#8a6200 0%,#f0b800 100%)',warm:'linear-gradient(160deg,#126030 0%,#20c060 100%)',single:'linear-gradient(160deg,#126030 0%,#20c060 100%)',warmrec:'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',midbreak:'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',break:'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',hold:'linear-gradient(160deg,#906000 0%,#d4a017 100%)',attack_A:'linear-gradient(160deg,#c02800 0%,#ff5030 100%)',attack_B:'linear-gradient(160deg,#0038b0 0%,#3090ff 100%)',recovery:'linear-gradient(160deg,#1a1a2e 0%,#2d2d50 100%)',blockrecovery:'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)',topset_input:'linear-gradient(160deg,#1a0a2e 0%,#3d1a5e 100%)'};
 
-// ═══════════════════════════════════════
-// SEQUENCE BUILDERS
-// ═══════════════════════════════════════
 function buildResistenzaSeq(){
-  const nA=document.getElementById('nameA').value.trim()||'Squadra A';
-  const nB=document.getElementById('nameB').value.trim()||'Squadra B';
-  const seq=[];
-  // Riscaldamento
-  for(let w=0;w<p.warmRounds;w++){
-    const wn=w+1;
-    seq.push({type:'proto',   duration:PROTO_DUR, label:'PROTOCOLLO',    name:'PROTOCOLLO', badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
-    seq.push({type:'warm',    duration:p.warmDuration, label:'RISCALDAMENTO', name:"LET'S GO", badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
-    if(w<p.warmRounds-1) seq.push({type:'warmrec', duration:p.warmRecovery, label:'RECUPERO', name:'RECUPERO', badge:`RISC. ${wn}/${p.warmRounds}`, extra:''});
+  var nA=document.getElementById('nameA').value.trim()||'Squadra A';
+  var nB=document.getElementById('nameB').value.trim()||'Squadra B';
+  var seq=[];
+  for(var w=0;w<p.warmRounds;w++){
+    var wn=w+1;
+    seq.push({type:'proto',duration:PROTO_DUR,label:'PROTOCOLLO',name:'PROTOCOLLO',badge:'RISC. '+wn+'/'+p.warmRounds,extra:''});
+    seq.push({type:'warm',duration:p.warmDuration,label:'RISCALDAMENTO',name:"LET'S GO",badge:'RISC. '+wn+'/'+p.warmRounds,extra:''});
+    if(w<p.warmRounds-1)seq.push({type:'warmrec',duration:p.warmRecovery,label:'RECUPERO',name:'RECUPERO',badge:'RISC. '+wn+'/'+p.warmRounds,extra:''});
   }
-  seq.push({type:'midbreak', duration:p.midBreak, label:'FINE RISCALDAMENTO', name:'PAUSA', badge:'PAUSA', extra:''});
-  // Blocchi
-  for(let b=0;b<p.blocks;b++){
-    const bn=b+1;
-    for(let t=0;t<p.tiratePerBlock;t++){
-      const tn=t+1;
-      const badge=`BL. ${bn}/${p.blocks} · TIR. ${tn}/${p.tiratePerBlock}`;
-      seq.push({type:'proto', duration:PROTO_DUR, label:'PROTOCOLLO', name:'PROTOCOLLO', badge, extra:''});
-      for(let a=0;a<p.attacks;a++){
-        const isA=(a%2===0);
-        const tname=isA?nA:nB;
-        seq.push({type:'hold', duration:p.holdDur, label:'TENUTA', name:'TENUTA', badge, extra:''});
-        seq.push({type:isA?'attack_A':'attack_B', duration:p.attackDur, label:'ATTACCO', name:tname, badge, extra:tname});
+  seq.push({type:'midbreak',duration:p.midBreak,label:'FINE RISCALDAMENTO',name:'PAUSA',badge:'PAUSA',extra:''});
+  for(var b=0;b<p.blocks;b++){
+    var bn=b+1;
+    for(var t=0;t<p.tiratePerBlock;t++){
+      var tn=t+1,badge='BL. '+bn+'/'+p.blocks+' TIR. '+tn+'/'+p.tiratePerBlock;
+      seq.push({type:'proto',duration:PROTO_DUR,label:'PROTOCOLLO',name:'PROTOCOLLO',badge:badge,extra:''});
+      for(var a=0;a<p.attacks;a++){
+        var isA=(a%2===0),tname=isA?nA:nB;
+        seq.push({type:'hold',duration:p.holdDur,label:'TENUTA',name:'TENUTA',badge:badge,extra:''});
+        seq.push({type:isA?'attack_A':'attack_B',duration:p.attackDur,label:'ATTACCO',name:tname,badge:badge,extra:tname});
       }
-      const isLastT=(t===p.tiratePerBlock-1), isLastB=(b===p.blocks-1);
-      if(!isLastT) seq.push({type:'recovery', duration:p.trainRecovery, label:'RECUPERO', name:'RECUPERO', badge, extra:''});
-      else if(!isLastB) seq.push({type:'blockrecovery', duration:p.blockRecovery, label:'FINE BLOCCO', name:'RECUPERO', badge:`FINE BL. ${bn}/${p.blocks}`, extra:''});
+      var isLastT=(t===p.tiratePerBlock-1),isLastB=(b===p.blocks-1);
+      if(!isLastT)seq.push({type:'recovery',duration:p.trainRecovery,label:'RECUPERO',name:'RECUPERO',badge:badge,extra:''});
+      else if(!isLastB)seq.push({type:'blockrecovery',duration:p.blockRecovery,label:'FINE BLOCCO',name:'RECUPERO',badge:'FINE BL. '+bn+'/'+p.blocks,extra:''});
     }
   }
   return seq;
 }
 
-function buildForzaTirate(block, nTirate, recSec, badgePrefix, isAlt){
-  const nA=document.getElementById('nameA').value.trim()||'Squadra A';
-  const nB=document.getElementById('nameB').value.trim()||'Squadra B';
-  const pre = block==='fts'?'fts':block==='fbo'?'fbo':'fres';
-  const seq=[];
-  for(let t=0;t<nTirate;t++){
-    const badge=`${badgePrefix} ${t+1}/${nTirate}`;
-    seq.push({type:'proto', duration:PROTO_DUR, label:'PROTOCOLLO', name:'PROTOCOLLO', badge, extra:''});
+function buildForzaTirate(block,nTirate,recSec,badgePrefix,isAlt){
+  var nA=document.getElementById('nameA').value.trim()||'Squadra A';
+  var nB=document.getElementById('nameB').value.trim()||'Squadra B';
+  var seq=[];
+  for(var t=0;t<nTirate;t++){
+    var badge=badgePrefix+' '+(t+1)+'/'+nTirate;
+    seq.push({type:'proto',duration:PROTO_DUR,label:'PROTOCOLLO',name:'PROTOCOLLO',badge:badge,extra:''});
     if(isAlt){
-      for(let a=0;a<fp[`${pre}Atk`];a++){
-        const isA=(a%2===0), tname=isA?nA:nB;
-        seq.push({type:'hold', duration:fp[`${pre}Hold`], label:'TENUTA', name:'TENUTA', badge, extra:''});
-        seq.push({type:isA?'attack_A':'attack_B', duration:fp[`${pre}Att`], label:'ATTACCO', name:tname, badge, extra:tname});
+      for(var a=0;a<fp[block+'Atk'];a++){
+        var isA=(a%2===0),tname=isA?nA:nB;
+        seq.push({type:'hold',duration:fp[block+'Hold'],label:'TENUTA',name:'TENUTA',badge:badge,extra:''});
+        seq.push({type:isA?'attack_A':'attack_B',duration:fp[block+'Att'],label:'ATTACCO',name:tname,badge:badge,extra:tname});
       }
     } else {
-      const dur = block==='fts'?fp.ftsSingle:block==='fbo'?fp.fboSingle:fp.fresSingle;
-      seq.push({type:'single', duration:dur, label:'TIRATA', name:"LET'S GO", badge, extra:''});
+      seq.push({type:'single',duration:fp[block+'Single'],label:'TIRATA',name:"LET'S GO",badge:badge,extra:''});
     }
-    if(t<nTirate-1) seq.push({type:'recovery', duration:recSec, label:'RECUPERO', name:'RECUPERO', badge, extra:''});
+    if(t<nTirate-1)seq.push({type:'recovery',duration:recSec,label:'RECUPERO',name:'RECUPERO',badge:badge,extra:''});
   }
   return seq;
 }
 
 function buildForzaSeq(){
-  const seq=[];
-  // Riscaldamento (sempre singola per forza)
-  for(let w=0;w<fp.fwR;w++){
-    const wn=w+1;
-    seq.push({type:'proto', duration:PROTO_DUR, label:'PROTOCOLLO', name:'PROTOCOLLO', badge:`RISC. ${wn}/${fp.fwR}`, extra:''});
-    seq.push({type:'single', duration:fp.fwDur, label:'RISCALDAMENTO', name:"LET'S GO", badge:`RISC. ${wn}/${fp.fwR}`, extra:''});
-    if(w<fp.fwR-1) seq.push({type:'warmrec', duration:fp.fwRec, label:'RECUPERO', name:'RECUPERO', badge:`RISC. ${wn}/${fp.fwR}`, extra:''});
+  var seq=[];
+  for(var w=0;w<fp.fwR;w++){
+    var wn=w+1;
+    seq.push({type:'proto',duration:PROTO_DUR,label:'PROTOCOLLO',name:'PROTOCOLLO',badge:'RISC. '+wn+'/'+fp.fwR,extra:''});
+    seq.push({type:'single',duration:fp.fwDur,label:'RISCALDAMENTO',name:"LET'S GO",badge:'RISC. '+wn+'/'+fp.fwR,extra:''});
+    if(w<fp.fwR-1)seq.push({type:'warmrec',duration:fp.fwRec,label:'RECUPERO',name:'RECUPERO',badge:'RISC. '+wn+'/'+fp.fwR,extra:''});
   }
-  seq.push({type:'break', duration:fp.fb1, label:'PAUSA', name:'PAUSA', badge:'⏸ PAUSA', extra:''});
-  // Top Set
-  seq.push(...buildForzaTirate('fts', fp.ftsR, fp.ftsRec, '🏆 TOP SET', fAltMode.fts));
-  // Input peso
-  seq.push({type:'topset_input', duration:0, label:'INSERISCI PESO', name:'TOP SET', badge:'🏆 TOP SET', extra:''});
-  seq.push({type:'break', duration:fp.fb2, label:'PAUSA', name:'PAUSA', badge:'⏸ PAUSA', extra:''});
-  // Back Off
-  seq.push(...buildForzaTirate('fbo', fp.fboR, fp.fboRec, '💪 BACK OFF', fAltMode.fbo));
-  seq.push({type:'break', duration:fp.fb3, label:'PAUSA', name:'PAUSA', badge:'⏸ PAUSA', extra:''});
-  // Resistenza
-  seq.push(...buildForzaTirate('fres', fp.fresR, fp.fresRec, '🔁 RESIST.', fAltMode.fres));
+  seq.push({type:'break',duration:fp.fb1,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
+  for(var t=0;t<fp.ftsR;t++){
+    var badge='TOP SET '+(t+1)+'/'+fp.ftsR;
+    seq.push({type:'proto',duration:PROTO_DUR,label:'PROTOCOLLO',name:'PROTOCOLLO',badge:badge,extra:''});
+    seq.push({type:'single',duration:fp.ftsDur,label:'TOP SET',name:"LET'S GO",badge:badge,extra:''});
+    if(t<fp.ftsR-1)seq.push({type:'recovery',duration:fp.ftsRec,label:'RECUPERO',name:'RECUPERO',badge:badge,extra:''});
+  }
+  seq.push({type:'topset_input',duration:0,label:'INSERISCI PESO',name:'TOP SET',badge:'TOP SET',extra:''});
+  seq.push({type:'break',duration:fp.fb2,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
+  var fboSeq=buildForzaTirate('fbo',fp.fboR,fp.fboRec,'BACK OFF',fAltMode.fbo);
+  fboSeq.forEach(function(ph){seq.push(ph);});
+  seq.push({type:'break',duration:fp.fb3,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
+  var fresSeq=buildForzaTirate('fres',fp.fresR,fp.fresRec,'RESIST.',fAltMode.fres);
+  fresSeq.forEach(function(ph){seq.push(ph);});
   return seq;
 }
 
-// ═══════════════════════════════════════
-// ENGINE
-// ═══════════════════════════════════════
-let sequence=[], seqIdx=0, ticker=null, curSec=0, curDur=0;
-let isPaused=false, workoutStart=0, realTopSet=0;
+var sequence=[],seqIdx=0,ticker=null,curSec=0,curDur=0,isPaused=false,workoutStart=0,realTopSet=0;
 
 function buildDots(){
-  const c=document.getElementById('phaseDots');c.innerHTML='';
-  sequence.forEach(ph=>{
-    if(ph.type==='topset_input') return;
-    const d=document.createElement('div');d.className='phase-dot';c.appendChild(d);
-  });
+  var c=document.getElementById('phaseDots');c.innerHTML='';
+  sequence.forEach(function(ph){if(ph.type==='topset_input')return;var d=document.createElement('div');d.className='phase-dot';c.appendChild(d);});
 }
-function getDotIdx(si){let di=0;for(let i=0;i<si;i++)if(sequence[i].type!=='topset_input')di++;return di;}
+function getDotIdx(si){var di=0;for(var i=0;i<si;i++)if(sequence[i].type!=='topset_input')di++;return di;}
 function updateDots(){
-  const dots=document.querySelectorAll('.phase-dot');
-  const cur=getDotIdx(seqIdx);
-  dots.forEach((d,i)=>{d.classList.remove('done','current');if(i<cur)d.classList.add('done');else if(i===cur)d.classList.add('current');});
+  var dots=document.querySelectorAll('.phase-dot'),cur=getDotIdx(seqIdx);
+  dots.forEach(function(d,i){d.classList.remove('done','current');if(i<cur)d.classList.add('done');else if(i===cur)d.classList.add('current');});
 }
 function applyPhase(ph){
   document.getElementById('timerBg').style.background=COLORS[ph.type]||COLORS.recovery;
   document.getElementById('phaseLabel').textContent=ph.label;
   document.getElementById('teamName').textContent=ph.name;
   document.getElementById('roundBadge').textContent=ph.badge;
-  curDur=ph.duration;
-  updateDots();
-  updateWeightDisplay(ph);
+  curDur=ph.duration;updateDots();updateWeightDisplay(ph);
 }
 function updateWeightDisplay(ph){
-  const wd=document.getElementById('weightDisplay');
-  if(realTopSet>0 && ph.badge && (ph.badge.includes('BACK OFF')||ph.badge.includes('RESIST.'))){
-    const pct=ph.badge.includes('BACK OFF')?fp.fboPct:fp.fresPct;
-    wd.textContent=`${round5(realTopSet*pct/100)} kg`;
-    wd.classList.remove('hidden');
-  } else { wd.classList.add('hidden'); }
+  var wd=document.getElementById('weightDisplay');
+  if(realTopSet>0&&ph.badge&&(ph.badge.includes('BACK OFF')||ph.badge.includes('RESIST.'))){
+    var pct=ph.badge.includes('BACK OFF')?fp.fboPct:fp.fresPct;
+    wd.textContent=round5(realTopSet*pct/100)+' kg';wd.classList.remove('hidden');
+  } else {wd.classList.add('hidden');}
 }
 function tick(){
-  if(isPaused) return;
-  curSec--;
+  if(isPaused)return;curSec--;
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width=(curSec/curDur*100)+'%';
-  if(curSec<=3&&curSec>0) playTick();
-  if(curSec<=0){playPhaseEnd();setTimeout(()=>{if(!isPaused)nextPhase();},300);}
+  if(curSec<=3&&curSec>0)playTick();
+  if(curSec<=0){playPhaseEnd();setTimeout(function(){if(!isPaused)nextPhase();},300);}
 }
 function nextPhase(){seqIdx++;if(seqIdx>=sequence.length){finishWorkout();return;}launchPhase(seqIdx);}
 function launchPhase(idx){
-  const ph=sequence[idx];
+  var ph=sequence[idx];
   if(ph.type==='topset_input'){showTopSetOverlay();return;}
-  applyPhase(ph);
-  curSec=ph.duration;
+  applyPhase(ph);curSec=ph.duration;
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width='100%';
-  if(ph.type==='attack_A'||ph.type==='attack_B') playAttackStart();
-  setTimeout(()=>voiceForPhase(ph.type,ph.extra),350);
+  if(ph.type==='attack_A'||ph.type==='attack_B')playAttackStart();
+  setTimeout(function(){voiceForPhase(ph.type,ph.extra);},350);
 }
 
-// ═══════════════════════════════════════
-// TOP SET OVERLAY
-// ═══════════════════════════════════════
 function showTopSetOverlay(){
   clearInterval(ticker);ticker=null;
   try{window.speechSynthesis.cancel();}catch(e){}
   document.getElementById('topsetInput').value='';
-  document.getElementById('topsetCalc').innerHTML=`
-    <div class="topset-calc-row">Top Set stimato<span class="tcv">${fp.ftsW} kg</span></div>
-    <div class="topset-calc-row">Back Off (${fp.fboPct}%)<span class="tcv" id="calc-bo">—</span></div>
-    <div class="topset-calc-row">Resistenza (${fp.fresPct}%)<span class="tcv" id="calc-res">—</span></div>
-  `;
+  document.getElementById('topsetCalc').innerHTML='<div class="topset-calc-row">Top Set stimato<span class="tcv">'+fp.ftsW+' kg</span></div><div class="topset-calc-row">Back Off ('+fp.fboPct+'%)<span class="tcv" id="calc-bo">—</span></div><div class="topset-calc-row">Resistenza ('+fp.fresPct+'%)<span class="tcv" id="calc-res">—</span></div>';
   document.getElementById('topsetOverlay').classList.remove('hidden');
   speak('Fine top set. Inserisci il peso reale.');
   document.getElementById('topsetInput').oninput=function(){
-    const v=parseFloat(this.value)||0;
-    const elBo=document.getElementById('calc-bo'),elRes=document.getElementById('calc-res');
-    if(elBo) elBo.textContent=v>0?`${round5(v*fp.fboPct/100)} kg`:'—';
-    if(elRes) elRes.textContent=v>0?`${round5(v*fp.fresPct/100)} kg`:'—';
+    var v=parseFloat(this.value)||0;
+    var eb=document.getElementById('calc-bo'),er=document.getElementById('calc-res');
+    if(eb)eb.textContent=v>0?round5(v*fp.fboPct/100)+' kg':'—';
+    if(er)er.textContent=v>0?round5(v*fp.fresPct/100)+' kg':'—';
   };
 }
 function confirmTopSet(){
-  const v=parseFloat(document.getElementById('topsetInput').value)||fp.ftsW;
-  realTopSet=v;
-  document.getElementById('topsetOverlay').classList.add('hidden');
-  seqIdx++;
-  if(seqIdx>=sequence.length){finishWorkout();return;}
-  launchPhase(seqIdx);
-  ticker=setInterval(tick,1000);
+  var v=parseFloat(document.getElementById('topsetInput').value)||fp.ftsW;
+  realTopSet=v;document.getElementById('topsetOverlay').classList.add('hidden');
+  seqIdx++;if(seqIdx>=sequence.length){finishWorkout();return;}
+  launchPhase(seqIdx);ticker=setInterval(tick,1000);
 }
 
-// ═══════════════════════════════════════
-// PAUSE / START / STOP / DONE
-// ═══════════════════════════════════════
 function togglePause(){
   isPaused=!isPaused;
   document.getElementById('pausedOverlay').classList.toggle('hidden',!isPaused);
   document.getElementById('pauseBtn').textContent=isPaused?'▶':'⏸';
-  if(isPaused) try{window.speechSynthesis.cancel();}catch(e){}
+  if(isPaused)try{window.speechSynthesis.cancel();}catch(e){}
 }
-
 function startWorkout(){
-  getAudio();
-  try{window.speechSynthesis.cancel();}catch(e){}
-  isPaused=false; realTopSet=0;
-  sequence = currentMode==='res' ? buildResistenzaSeq() : buildForzaSeq();
-  seqIdx=0; workoutStart=Date.now();
-  buildDots();
+  getAudio();try{window.speechSynthesis.cancel();}catch(e){}
+  isPaused=false;realTopSet=0;
+  sequence=currentMode==='res'?buildResistenzaSeq():buildForzaSeq();
+  seqIdx=0;workoutStart=Date.now();buildDots();
   document.getElementById('setup').classList.remove('active');
   document.getElementById('timer').classList.add('active');
   document.getElementById('doneScreen').classList.add('hidden');
@@ -750,66 +553,42 @@ function startWorkout(){
   document.getElementById('topsetOverlay').classList.add('hidden');
   document.getElementById('pauseBtn').textContent='⏸';
   document.getElementById('weightDisplay').classList.add('hidden');
-  launchPhase(0);
-  if(ticker) clearInterval(ticker);
-  ticker=setInterval(tick,1000);
+  launchPhase(0);if(ticker)clearInterval(ticker);ticker=setInterval(tick,1000);
 }
-
-function stopWorkout(){
-  clearInterval(ticker);ticker=null;isPaused=false;
-  try{window.speechSynthesis.cancel();}catch(e){}
-  goSetup();
-}
-
+function stopWorkout(){clearInterval(ticker);ticker=null;isPaused=false;try{window.speechSynthesis.cancel();}catch(e){}goSetup();}
 function finishWorkout(){
-  clearInterval(ticker);ticker=null;
-  playDone();
-  setTimeout(()=>speak('Allenamento completato! Ottimo lavoro!'),700);
-  const elapsed=Math.round((Date.now()-workoutStart)/1000);
-  let statsHtml=`<div class="done-stat-row">Durata totale<span class="dsv">${fmt(elapsed)}</span></div>`;
+  clearInterval(ticker);ticker=null;playDone();
+  setTimeout(function(){speak('Allenamento completato! Ottimo lavoro!');},700);
+  var elapsed=Math.round((Date.now()-workoutStart)/1000);
+  var html='<div class="done-stat-row">Durata totale<span class="dsv">'+fmt(elapsed)+'</span></div>';
   if(currentMode==='res'){
-    statsHtml+=`
-      <div class="done-stat-row">Tirate riscaldamento<span class="dsv">${p.warmRounds}</span></div>
-      <div class="done-stat-row">Blocchi<span class="dsv">${p.blocks}</span></div>
-      <div class="done-stat-row">Tirate totali<span class="dsv">${p.blocks*p.tiratePerBlock}</span></div>
-    `;
+    html+='<div class="done-stat-row">Blocchi<span class="dsv">'+p.blocks+'</span></div><div class="done-stat-row">Tirate totali<span class="dsv">'+(p.blocks*p.tiratePerBlock)+'</span></div>';
   } else {
-    const boW=realTopSet>0?round5(realTopSet*fp.fboPct/100):'-';
-    const resW=realTopSet>0?round5(realTopSet*fp.fresPct/100):'-';
-    statsHtml+=`
-      <div class="done-stat-row">Top Set<span class="dsv">${realTopSet>0?realTopSet:fp.ftsW} kg</span></div>
-      <div class="done-stat-row">Back Off<span class="dsv">${boW} kg</span></div>
-      <div class="done-stat-row">Resistenza<span class="dsv">${resW} kg</span></div>
-    `;
+    var boW=realTopSet>0?round5(realTopSet*fp.fboPct/100):'-';
+    var resW=realTopSet>0?round5(realTopSet*fp.fresPct/100):'-';
+    html+='<div class="done-stat-row">Top Set<span class="dsv">'+(realTopSet>0?realTopSet:fp.ftsW)+' kg</span></div><div class="done-stat-row">Back Off<span class="dsv">'+boW+' kg</span></div><div class="done-stat-row">Resistenza<span class="dsv">'+resW+' kg</span></div>';
   }
-  document.getElementById('doneStats').innerHTML=statsHtml;
+  document.getElementById('doneStats').innerHTML=html;
   document.getElementById('doneScreen').classList.remove('hidden');
 }
-
 function goSetup(){
   clearInterval(ticker);ticker=null;isPaused=false;
   try{window.speechSynthesis.cancel();}catch(e){}
   document.getElementById('timer').classList.remove('active');
   document.getElementById('doneScreen').classList.add('hidden');
   document.getElementById('pausedOverlay').classList.add('hidden');
-  if(document.getElementById('topsetOverlay')) document.getElementById('topsetOverlay').classList.add('hidden');
+  document.getElementById('topsetOverlay').classList.add('hidden');
   document.getElementById('setup').classList.add('active');
 }
 
-// ═══════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════
-updateSummaries();
-updateForzaPills();
-updateForzaRecap();
+updateSummaries();updateForzaPills();updateForzaRecap();
 
-let lastTouchY=0;
-document.addEventListener('touchstart',e=>{lastTouchY=e.touches[0].clientY;},{passive:false});
-document.addEventListener('touchmove',e=>{
-  const setup=document.getElementById('setup');
-  const dy=e.touches[0].clientY-lastTouchY;
-  lastTouchY=e.touches[0].clientY;
-  if(dy>0&&setup.scrollTop<=0) e.preventDefault();
+var lastTouchY=0;
+document.addEventListener('touchstart',function(e){lastTouchY=e.touches[0].clientY;},{passive:false});
+document.addEventListener('touchmove',function(e){
+  var setup=document.getElementById('setup');
+  var dy=e.touches[0].clientY-lastTouchY;lastTouchY=e.touches[0].clientY;
+  if(dy>0&&setup.scrollTop<=0)e.preventDefault();
 },{passive:false});
 </script>
 </body>
