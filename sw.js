@@ -1,4 +1,4 @@
-const CACHE = 'tirafune-v5';
+const CACHE = 'tirafune-v6';
 const ASSETS = [
   '/tira-fune/',
   '/tira-fune/index.html',
