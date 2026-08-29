@@ -383,6 +383,9 @@ function playPhaseEnd(){beep(880,0.12,'sine',0.5);setTimeout(function(){beep(880
 function playAttackStart(){beep(1000,0.08,'square',0.4);setTimeout(function(){beep(1200,0.15,'square',0.45);},80);}
 function playDone(){[0,250,500,800].forEach(function(d,i){setTimeout(function(){beep(440+i*110,0.3,'sine',0.5);},d);});}
 
+const FRASI_AVVISO=['Brutti maieli da ngrasso, comincèno a preparasse','Pezzi di merda è ora di tirare ancora','Din don, gli atleti sono pregati di recarsi in pedana','Boccali sali in pedana','Porco dio ma ancora non state in pedana?','Corazzi king del portella, prepara la squadra','SIRENA'];
+function playSirena(){try{var c=getAudio(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sawtooth';g.gain.setValueAtTime(0.4,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+2.5);o.frequency.setValueAtTime(400,c.currentTime);for(var i=0;i<5;i++){o.frequency.linearRampToValueAtTime(900,c.currentTime+0.25+i*0.5);o.frequency.linearRampToValueAtTime(400,c.currentTime+0.5+i*0.5);}o.start(c.currentTime);o.stop(c.currentTime+2.5);}catch(e){}}
+function playAvviso(){var idx=Math.floor(Math.random()*FRASI_AVVISO.length);if(FRASI_AVVISO[idx]==='SIRENA')playSirena();else speak(FRASI_AVVISO[idx]);}  
 function speak(text){try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='it-IT';u.rate=0.95;u.pitch=1.05;window.speechSynthesis.speak(u);}catch(e){}}
 function voiceForPhase(type,extra){
   if(type==='proto')speak('Protocollo');
@@ -471,7 +474,7 @@ function buildForzaSeq(){
   return seq;
 }
 
-var sequence=[],seqIdx=0,ticker=null,curSec=0,curDur=0,isPaused=false,workoutStart=0,realTopSet=0;
+var sequence=[],seqIdx=0,ticker=null,curSec=0,curDur=0,isPaused=false,workoutStart=0,realTopSet=0,avvisoFired=false;
 
 function buildDots(){
   var c=document.getElementById('phaseDots');c.innerHTML='';
@@ -501,6 +504,7 @@ function tick(){
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width=(curSec/curDur*100)+'%';
   if(curSec<=3&&curSec>0)playTick();
+  if(!avvisoFired){var ph=sequence[seqIdx];var pt=['recovery','blockrecovery','break','midbreak','warmrec'];if(pt.indexOf(ph.type)!==-1){var nx=sequence[seqIdx+1];if(nx&&nx.type==='proto'&&(curSec===60||(curDur<=60&&curSec===curDur))){avvisoFired=true;playAvviso();}}}
   if(curSec<=0){playPhaseEnd();setTimeout(function(){if(!isPaused)nextPhase();},300);}
 }
 function nextPhase(){seqIdx++;if(seqIdx>=sequence.length){finishWorkout();return;}launchPhase(seqIdx);}
@@ -508,10 +512,11 @@ function launchPhase(idx){
   var ph=sequence[idx];
   if(ph.type==='topset_input'){showTopSetOverlay();return;}
   applyPhase(ph);curSec=ph.duration;
+  avvisoFired=false;
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width='100%';
   if(ph.type==='attack_A'||ph.type==='attack_B')playAttackStart();
-  setTimeout(function(){voiceForPhase(ph.type,ph.extra);},350);
+  voiceForPhase(ph.type,ph.extra);
 }
 
 function showTopSetOverlay(){
