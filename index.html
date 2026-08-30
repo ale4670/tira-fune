@@ -342,6 +342,13 @@ function adjust(key,delta){
   document.getElementById('val-'+key).innerHTML=p[key]+'<span class="unit">'+UNITS[key]+'</span>';
   updateSummaries();
 }
+  function fixBottomPadding(){
+  var bar=document.getElementById('bottomBar');
+  var setup=document.getElementById('setup');
+  if(bar&&setup){
+    setup.style.paddingBottom=(bar.offsetHeight+16)+'px';
+  }
+}
 function updateSummaries(){
   document.getElementById('pill-tiratadur').textContent=fmt(p.attacks*(p.holdDur+p.attackDur));
   document.getElementById('pill-tirateTotal').textContent=(p.blocks*p.tiratePerBlock)+' tirate';
@@ -616,6 +623,8 @@ function goSetup(){
   });
 }
 updateSummaries();updateForzaPills();updateForzaRecap();
+  fixBottomPadding();
+window.addEventListener('resize',fixBottomPadding);
 
 var lastTouchY=0;
 document.addEventListener('touchstart',function(e){lastTouchY=e.touches[0].clientY;},{passive:false});
