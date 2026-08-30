@@ -13,7 +13,7 @@
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));}</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0f;--card:#2a2a3a;--border:#2a2a3a;--text:#f0f0f5;--muted:#20c060;--accent:#20c060;--warm:#f0b800;}
+:root{--bg:#0a0a0f;--card:#14141c;--border:#2a2a3a;--text:#f0f0f5;--muted:#5a5a72;--accent:#20c060;--warm:#f0b800;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden;overscroll-behavior:none;}
 .screen{display:none;flex-direction:column;}
@@ -135,14 +135,16 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 
   <!-- PROTOCOLLO GLOBALE -->
   <div>
-    <div class="section-card" style="background:rgba(240,184,0,0.1);border-color:rgba(240,184,0,0.3);gap:18px;">
-        <div class="proto-box" style="background:transparent;border:none;padding:0 2px;"><div class="param-info"><label>Protocollo</ label><div class="param-value" id="val-protoDur">30<span class="unit">sec</span></div></div>
+    <div class="section-card" style="background:rgba(240,184,0,0.1);border-color:rgba(240,184,0,0.3);">
+      <div class="proto-box">
+        <div class="param-info"><label>Protocollo</ label><div class="param-value" id="val-protoDur">30<span class="unit">sec</span></div></div>
         <div class="stepper">
           <button ontouchstart="" onclick="adjustProto(-5)">−</button>
           <button ontouchstart="" onclick="adjustProto(5)">+</button>
         </div>
       </div>
     </div>
+  </div>
 
 
   <!-- Squadre -->
