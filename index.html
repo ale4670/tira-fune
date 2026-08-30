@@ -18,9 +18,11 @@
 body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden;overscroll-behavior:none;}
 .screen{display:none;flex-direction:column;}
 .screen.active{display:flex;}
-#setup{height:100dvh;overflow-y:auto;overflow-x:hidden;padding:calc(24px + env(safe-area-inset-top)) 18px calc(140px + env(safe-area-inset-bottom));gap:15px;}
+#setup{height:100dvh;overflow-y:auto;overflow-x:hidden;padding:calc(24px + env(safe-area-inset-top)) 18px calc(100px + env(safe-area-inset-bottom));gap:15px;}
 .app-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,10vw,3.6rem);letter-spacing:4px;text-align:center;line-height:1;}
 .app-title span{color:var(--accent);}
+.update-btn{position:absolute;top:calc(12px + env(safe-area-inset-top));right:18px;width:42px;height:42px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s;}
+.update-btn.flash{background:var(--accent);}
 .app-sub{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:5px;color:var(--muted);text-align:center;margin-top:2px;}
 .mode-tabs{display:flex;gap:8px;}
 .mode-tab{flex:1;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;cursor:pointer;text-align:center;transition:all .15s;}
@@ -54,7 +56,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .recap-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;}
 .recap-total{display:flex;justify-content:space-between;align-items:center;}
 .recap-total span{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--accent);}
-.start-btn{background:var(--accent);color:white;border:none;border-radius:18px;padding:21px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;width:100%;cursor:pointer;box-shadow:0 8px 32px rgba(255,58,58,.4);transition:transform .1s;margin-top:0px;}
+.start-btn{background:var(--accent);color:white;border:none;border-radius:18px;padding:21px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;width:100%;cursor:pointer;transition:transform .1s;margin-top:0px;}
 .start-btn:active{transform:scale(.97);}
 #timer{position:fixed;inset:0;overflow:hidden;}
 .timer-bg{position:absolute;inset:0;z-index:0;transition:background .4s ease;}
@@ -105,6 +107,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 
 <div id="setup" class="screen active">
   <div>
+    <button class="update-btn" id="updateBtn" onclick="forceUpdate()">↺</button>
     <div class="app-title">TIRA LA <span>FUNE</span></div>
     <div class="app-sub">COMPETITION TIMER</div>
   </div>
@@ -112,8 +115,8 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
   <div>
     <div class="section-label">🏋️ Tipo allenamento</div>
     <div class="mode-tabs">
-      <div class="mode-tab active" id="tab-res" onclick="setMode('res')">RESISTENZA</div>
-      <div class="mode-tab" id="tab-for" onclick="setMode('for')">FORZA</div>
+      <div class="mode-tab" id="tab-res" onclick="setMode('res')">RESISTENZA</div>
+      <div class="mode-tab active" id="tab-for" onclick="setMode('for')">FORZA</div>
     </div>
   </div>
 
@@ -309,7 +312,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 </div>
 
 <script>
-let currentMode='res';
+let currentMode='for';
 function setMode(m){
   currentMode=m;
   document.getElementById('tab-res').classList.toggle('active',m==='res');
@@ -529,7 +532,7 @@ function launchPhase(idx){
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width='100%';
   if(ph.type==='attack_A'||ph.type==='attack_B')playAttackStart();
-  voiceForPhase(ph.type,ph.extra);
+  setTimeout(function(){voiceForPhase(ph.type,ph.extra);},800);
 }
 
 function showTopSetOverlay(){
@@ -571,6 +574,8 @@ function startWorkout(){
   document.getElementById('topsetOverlay').classList.add('hidden');
   document.getElementById('pauseBtn').textContent='⏸';
   document.getElementById('weightDisplay').classList.add('hidden');
+  document.getElementById('bottomBar').classList.add('hidden');
+  document.getElementById('updateBtn').classList.add('hidden');
   launchPhase(0);if(ticker)clearInterval(ticker);ticker=setInterval(tick,1000);
 }
 function stopWorkout(){clearInterval(ticker);ticker=null;isPaused=false;try{window.speechSynthesis.cancel();}catch(e){}goSetup();}
@@ -597,8 +602,19 @@ function goSetup(){
   document.getElementById('pausedOverlay').classList.add('hidden');
   document.getElementById('topsetOverlay').classList.add('hidden');
   document.getElementById('setup').classList.add('active');
+  document.getElementById('bottomBar').classList.remove('hidden');
+  document.getElementById('updateBtn').classList.remove('hidden');
 }
 
+  function forceUpdate(){
+  var btn=document.getElementById('updateBtn');
+  btn.classList.add('flash');
+  setTimeout(function(){btn.classList.remove('flash');},1000);
+  navigator.serviceWorker.getRegistrations().then(function(regs){
+    regs.forEach(function(r){r.unregister();});
+    setTimeout(function(){window.location.reload(true);},500);
+  });
+}
 updateSummaries();updateForzaPills();updateForzaRecap();
 
 var lastTouchY=0;
