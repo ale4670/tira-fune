@@ -13,7 +13,7 @@
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));}</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0f;--card:#14141c;--border:#2a2a3a;--text:#f0f0f5;--muted:#5a5a72;--accent:#20c060;--warm:#f0b800;--risc::rgba(255,107,43,0.3);--topset:rgba(255,58,58,0.3);}
+:root{--bg:#0a0a0f;--card:#14141c;--border:#2a2a3a;--text:#f0f0f5;--muted:#5a5a72;--accent:#20c060;--warm:#f0b800;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden;overscroll-behavior:none;}
 .screen{display:none;flex-direction:column;}
@@ -40,7 +40,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .mode-tab.active{background:var(--accent);border-color:var(--accent);color:white;}
 .section-label{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
 .section-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:13px 14px;display:flex;flex-direction:column;gap:9px;}
-.section-card-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--risc);border-bottom:1px solid var(--risc);padding-bottom:7px;margin-bottom:2px;}
+.section-card-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:7px;margin-bottom:2px;}
 .param-box{background:var(--bg);border:1px solid var(--border);border-radius:13px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .param-info{display:flex;flex-direction:column;gap:1px;flex:1;}
 .param-info label{font-size:.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
@@ -160,7 +160,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     <div style="display:flex;flex-direction:column;gap:15px;">
     <div>
       <div class="section-card" style="background:rgba(255,107,43,0.15);border-color:rgba(255,107,43,0.3);">
-        <div class="section-card-title">RISCALDAMENTO</div>
+        <div class="section-card-title" style="color:var(--muted);border-bottom:1px solid var(--border);">RISCALDAMENTO</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-warmRounds">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmRounds',-1)">−</button><button ontouchstart="" onclick="adjust('warmRounds',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-warmDuration">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmDuration',-5)">−</button><button ontouchstart="" onclick="adjust('warmDuration',5)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-warmRecovery">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('warmRecovery',-5)">−</button><button ontouchstart="" onclick="adjust('warmRecovery',5)">+</button></div></div>
