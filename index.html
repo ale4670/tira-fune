@@ -63,7 +63,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:var(--muted);border-radius:50%;transition:.3s;}
 .toggle input:checked+.toggle-slider{background:var(--accent);}
 .toggle input:checked+.toggle-slider:before{transform:translateX(22px);background:white;}
-.proto-box{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.proto-box{background:var(--bg);border:1px solid var(--border);border-radius:13px;padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .recap-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;display:flex;flex-direction:column;gap:6px;}
 .recap-total{display:flex;justify-content:space-between;align-items:center;}
 .recap-total span{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--accent);}
@@ -151,8 +151,8 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
   <!-- Squadre -->
   <div>
     <div class="name-row">
-      <div class="name-box"><label>Squadra A</label><input id="nameA" type="text" value="Squadra A" maxlength="12" oninput="updateSummaries()"></div>
-      <div class="name-box"><label>Squadra B</label><input id="nameB" type="text" value="Squadra B" maxlength="12" oninput="updateSummaries()"></div>
+      <div class="name-box" style="background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.20);"><label>Squadra A</label><input id="nameA" type="text" value="Squadra A" maxlength="12" oninput="updateSummaries()"></div>
+      <div class="name-box" style="background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.20);"><label>Squadra B</label><input id="nameB" type="text" value="Squadra B" maxlength="12" oninput="updateSummaries()"></div>
     </div>
   </div>
 
