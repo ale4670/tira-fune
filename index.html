@@ -323,6 +323,7 @@ function setMode(m){
   document.getElementById('mode-res').classList.toggle('hidden',m!=='res');
   document.getElementById('mode-for').classList.toggle('hidden',m!=='for');
   if(m==='for') updateForzaRecap();
+  fixBottomPadding();
 }
 
 let PROTO_DUR=30;
