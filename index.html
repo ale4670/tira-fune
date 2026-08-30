@@ -21,7 +21,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 #setup{height:100dvh;overflow-y:auto;overflow-x:hidden;padding:calc(24px + env(safe-area-inset-top)) 18px calc(100px + env(safe-area-inset-bottom));gap:15px;}
 .app-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,10vw,3.6rem);letter-spacing:4px;text-align:center;line-height:1;}
 .app-title span{color:var(--accent);}
-.update-btn{position:fixed;top:calc(12px + env(safe-area-inset-top));right:18px;z-index:50;width:42px;height:42px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s;}
+.update-btn{position:absolute;top:calc(12px + env(safe-area-inset-top));right:18px;width:42px;height:42px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s;}
 .update-btn.flash{background:var(--accent);}
 .app-sub{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:5px;color:var(--muted);text-align:center;margin-top:2px;}
 .mode-tabs{display:flex;gap:8px;}
@@ -107,9 +107,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 
 <div id="setup" class="screen active">
   <div>
-    <button class="update-btn" id="updateBtn" onclick="forceUpdate()">↺</button>
-    <div class="app-title">TIRA LA <span>FUNE</span></div>
-    <div class="app-sub">COMPETITION TIMER</div>
+    <div style="position:relative;">
+  <button class="update-btn" id="updateBtn" onclick="forceUpdate()">↺</button>
+  <div class="app-title">TIRA LA <span>FUNE</span></div>
+  <div class="app-sub">COMPETITION TIMER</div>
+      </div>
+</div>
   </div>
 
   <div>
