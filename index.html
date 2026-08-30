@@ -21,6 +21,17 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 #setup{height:100dvh;overflow-y:auto;overflow-x:hidden;padding:calc(24px + env(safe-area-inset-top)) 18px calc(100px + env(safe-area-inset-bottom));gap:15px;}
 .app-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,10vw,3.6rem);letter-spacing:4px;text-align:center;line-height:1;}
 .app-title span{color:var(--accent);}
+.color-btn{position:absolute;top:calc(12px + env(safe-area-inset-top));left:18px;width:42px;height:42px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.color-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;}
+.color-panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:16px;width:300px;}
+.color-panel-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--text);text-align:center;}
+.color-picker-row{display:flex;justify-content:center;}
+.color-picker-row input[type=color]{width:60px;height:40px;border:none;border-radius:8px;cursor:pointer;background:none;}
+.color-swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.swatch{width:100%;aspect-ratio:1;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s;}
+.swatch:active{transform:scale(.9);}
+.swatch.selected{border-color:white;}
+.color-close{background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;cursor:pointer;width:100%;}
 .update-btn{position:absolute;top:calc(12px + env(safe-area-inset-top));right:18px;width:42px;height:42px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s;}
 .update-btn.flash{background:var(--accent);}
 .app-sub{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:5px;color:var(--muted);text-align:center;margin-top:2px;}
@@ -108,6 +119,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 <div id="setup" class="screen active">
   <div>
     <div style="position:relative;">
+  <button class="color-btn" onclick="openColorPanel()">🖌</button>
   <button class="update-btn" id="updateBtn" onclick="forceUpdate()">↺</button>
   <div class="app-title">TIRA LA <span>FUNE</span></div>
   <div class="app-sub">COMPETITION TIMER</div>
@@ -615,6 +627,27 @@ function goSetup(){
   document.getElementById('updateBtn').classList.remove('hidden');
 }
 
+  var SWATCHES=['#ff3a3a','#ff6b2b','#f0b800','#20c060','#2b7fff','#8b5cf6','#ff2d78','#0ea5e9','#8b1a1a','#e2e8f0','#64748b','#d97706'];
+
+function openColorPanel(){
+  var grid=document.getElementById('colorSwatches');
+  var current=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+  grid.innerHTML=SWATCHES.map(function(c){
+    return '<div class="swatch'+(c===current?' selected':'')+'" style="background:'+c+'" onclick="applyColor(\''+c+'\')"></div>';
+  }).join('');
+  document.getElementById('colorPicker').value=current;
+  document.getElementById('colorOverlay').classList.remove('hidden');
+}
+function closeColorPanel(){
+  document.getElementById('colorOverlay').classList.add('hidden');
+}
+function applyColor(color){
+  document.documentElement.style.setProperty('--accent',color);
+  try{localStorage.setItem('accentColor',color);}catch(e){}
+  document.getElementById('colorPicker').value=color;
+  var swatches=document.querySelectorAll('.swatch');
+  swatches.forEach(function(s){s.classList.toggle('selected',s.style.background===color);});
+}
   function forceUpdate(){
   var btn=document.getElementById('updateBtn');
   btn.classList.add('flash');
@@ -624,6 +657,7 @@ function goSetup(){
     setTimeout(function(){window.location.reload(true);},500);
   });
 }
+  try{var saved=localStorage.getItem('accentColor');if(saved)applyColor(saved);}catch(e){}
 updateSummaries();updateForzaPills();updateForzaRecap();
   fixBottomPadding();
 window.addEventListener('resize',fixBottomPadding);
@@ -639,6 +673,16 @@ document.addEventListener('touchmove',function(e){
 <div class="bottom-bar" id="bottomBar">
   <div class="bottom-bar-total" id="bottomTotal">—</div>
   <button class="start-btn" onclick="startWorkout()">INIZIA ALLENAMENTO</button>
+</div>
+  <div class="color-overlay hidden" id="colorOverlay" onclick="closeColorPanel()">
+  <div class="color-panel" onclick="event.stopPropagation()">
+    <div class="color-panel-title">COLORE APP</div>
+    <div class="color-picker-row">
+      <input type="color" id="colorPicker" value="#20c060" oninput="applyColor(this.value)">
+    </div>
+    <div class="color-swatches" id="colorSwatches"></div>
+    <button class="color-close" onclick="closeColorPanel()">CHIUDI</button>
+  </div>
 </div>
 </body>
 </html>
