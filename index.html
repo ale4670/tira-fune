@@ -135,10 +135,10 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 
   <!-- PROTOCOLLO GLOBALE -->
   <div>
-    <div class="section-card" style="background:rgba(240,184,0,0.1);border-color:rgba(240,184,0,0.3);">
+    <div class="section-card">
       <div class="section-card-title" style="color:rgba(240,184,0,0.7);border-bottom:1px solid rgba(240,184,0,0.7);">PROTOCOLLO</div>
       <div class="proto-box">
-        <div class="param-info"><label>-</ label><div class="param-value" id="val-protoDur">30<span class="unit">sec</span></div></div>
+        <div class="param-info"><div class="param-value" id="val-protoDur">30<span class="unit">sec</span></div></div>
         <div class="stepper">
           <button ontouchstart="" onclick="adjustProto(-5)">−</button>
           <button ontouchstart="" onclick="adjustProto(5)">+</button>
@@ -174,7 +174,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
     <div>
       <div class="section-card" style="background:rgba(14,165,233,0.15);border-color:rgba(14,165,233,0.3);">
-        <div class="section-card-title">STRUTTURA BLOCCHI</div>
+        <div class="section-card-title" style="color:rgba(14,165,233,0.7);border-bottom:1px solid rgba(14,165,233,0.7);">STRUTTURA BLOCCHI</div>
         <div class="param-box"><div class="param-info"><label>Numero blocchi</label><div class="param-value" id="val-blocks">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('blocks',-1)">−</button><button ontouchstart="" onclick="adjust('blocks',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Tirate per blocco</label><div class="param-value" id="val-tiratePerBlock">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('tiratePerBlock',-1)">−</button><button ontouchstart="" onclick="adjust('tiratePerBlock',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-trainRecovery">90<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="adjust('trainRecovery',-10)">−</button><button ontouchstart="" onclick="adjust('trainRecovery',10)">+</button></div></div>
@@ -209,7 +209,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
     <div>
       <div class="section-card" style="background:rgba(255,58,58,0.15);border-color:rgba(255,58,58,0.3);">
-        <div class="section-card-title">TOP SET</div>
+        <div class="section-card-title" style="color:rgba(255,58,58,0.7);border-bottom:1px solid rgba(255,58,58,0.7);">TOP SET</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-ftsR">2<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsR',-1)">−</button><button ontouchstart="" onclick="fadjust('ftsR',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Durata tirata</label><div class="param-value" id="val-ftsDur">60<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsDur',-15)">−</button><button ontouchstart="" onclick="fadjust('ftsDur',15)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-ftsRec">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('ftsRec',-30)">−</button><button ontouchstart="" onclick="fadjust('ftsRec',30)">+</button></div></div>
@@ -223,7 +223,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
     <div>
       <div class="section-card" style="background:rgba(14,165,233,0.15);border-color:rgba(14,165,233,0.3);">
-        <div class="section-card-title">BACK OFF</div>
+        <div class="section-card-title" style="color:rgba(14,165,233,0.7);border-bottom:1px solid rgba(14,165,233,0.7);">BACK OFF</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fboR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboR',-1)">−</button><button ontouchstart="" onclick="fadjust('fboR',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fboRec">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fboRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fboPct">90<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fboPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fboPct',5)">+</button></div></div>
@@ -246,7 +246,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
     </div>
     <div>
       <div class="section-card" style="background:rgba(14,165,233,0.15);border-color:rgba(14,165,233,0.3);">
-        <div class="section-card-title">RESISTENZA</div>
+        <div class="section-card-title" style="color:rgba(14,165,233,0.7);border-bottom:1px solid rgba(14,165,233,0.7);">RESISTENZA</div>
         <div class="param-box"><div class="param-info"><label>Numero tirate</label><div class="param-value" id="val-fresR">3<span class="unit">×</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresR',-1)">−</button><button ontouchstart="" onclick="fadjust('fresR',1)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>Recupero tra tirate</label><div class="param-value" id="val-fresRec">300<span class="unit">sec</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresRec',-30)">−</button><button ontouchstart="" onclick="fadjust('fresRec',30)">+</button></div></div>
         <div class="param-box"><div class="param-info"><label>% del Top Set</label><div class="param-value" id="val-fresPct">90<span class="unit">%</span></div></div><div class="stepper"><button ontouchstart="" onclick="fadjust('fresPct',-5)">−</button><button ontouchstart="" onclick="fadjust('fresPct',5)">+</button></div></div>
