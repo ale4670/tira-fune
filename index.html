@@ -542,18 +542,23 @@ function tick(){
 }
   function prevPhase(){
   if(seqIdx<=0) return;
+  clearInterval(ticker);
+  ticker=null;
   seqIdx--;
   if(sequence[seqIdx].type==='topset_input') seqIdx--;
-  clearInterval(ticker);
   launchPhase(seqIdx);
-  ticker=setInterval(tick,1000);
 }
 function nextPhaseManual(){
   clearInterval(ticker);
+  ticker=null;
   playPhaseEnd();
-  setTimeout(function(){nextPhase();ticker=setInterval(tick,1000);},300);
+  setTimeout(function(){nextPhase();},300);
 }
-function nextPhase(){seqIdx++;if(seqIdx>=sequence.length){finishWorkout();return;}launchPhase(seqIdx);}
+function nextPhase(){
+  seqIdx++;
+  if(seqIdx>=sequence.length){finishWorkout();return;}
+  launchPhase(seqIdx);
+}
 function launchPhase(idx){
   var ph=sequence[idx];
   if(ph.type==='topset_input'){showTopSetOverlay();return;}
@@ -563,6 +568,7 @@ function launchPhase(idx){
   document.getElementById('progressFill').style.width='100%';
   if(ph.type==='attack_A'||ph.type==='attack_B')playAttackStart();
   setTimeout(function(){voiceForPhase(ph.type,ph.extra);},800);
+  ticker=setInterval(tick,1000);
 }
 
 function showTopSetOverlay(){
