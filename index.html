@@ -96,6 +96,8 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .topset-calc-row{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted);}
 .topset-calc-row .tcv{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--warm);}
 .timer-bottom{width:100%;display:flex;flex-direction:column;gap:12px;align-items:center;}
+.nav-btns{display:flex;gap:12px;align-items:center;}
+.nav-btn{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);color:white;border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .progress-wrap{width:100%;height:8px;background:rgba(0,0,0,.3);border-radius:4px;overflow:hidden;}
 .progress-fill{height:100%;border-radius:4px;background:rgba(255,255,255,.65);transition:width .3s linear;}
 .phase-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:340px;}
@@ -302,6 +304,10 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       <div class="big-timer" id="bigTimer">—</div>
     </div>
     <div class="timer-bottom">
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prevPhase()">‹</button>
+        <button class="nav-btn" onclick="nextPhaseManual()">›</button>
+      </div>
       <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:100%"></div></div>
       <div class="phase-dots" id="phaseDots"></div>
     </div>
@@ -533,6 +539,19 @@ function tick(){
   if(curSec<=3&&curSec>0)playTick();
   if(!avvisoFired){var ph=sequence[seqIdx];var pt=['recovery','blockrecovery','break','midbreak','warmrec'];if(pt.indexOf(ph.type)!==-1){var nx=sequence[seqIdx+1];if(nx&&nx.type==='proto'&&(curSec===60||(curDur<=60&&curSec===curDur))){avvisoFired=true;playAvviso();}}}
   if(curSec<=0){playPhaseEnd();setTimeout(function(){if(!isPaused)nextPhase();},300);}
+}
+  function prevPhase(){
+  if(seqIdx<=0) return;
+  seqIdx--;
+  if(sequence[seqIdx].type==='topset_input') seqIdx--;
+  clearInterval(ticker);
+  launchPhase(seqIdx);
+  ticker=setInterval(tick,1000);
+}
+function nextPhaseManual(){
+  clearInterval(ticker);
+  playPhaseEnd();
+  setTimeout(function(){nextPhase();ticker=setInterval(tick,1000);},300);
 }
 function nextPhase(){seqIdx++;if(seqIdx>=sequence.length){finishWorkout();return;}launchPhase(seqIdx);}
 function launchPhase(idx){
