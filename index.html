@@ -109,6 +109,12 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
 .done-stat-row:last-child{border-bottom:none;}
 .done-stat-row .dsv{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);}
 .again-btn{background:var(--accent);color:white;border:none;border-radius:14px;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;cursor:pointer;width:100%;}
+.resume-workout-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;}
+.resume-workout-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:4px;color:white;text-align:center;line-height:1.3;}
+.resume-workout-sub{font-size:.95rem;color:var(--muted);text-align:center;}
+.resume-btn-row{display:flex;flex-direction:column;gap:12px;width:100%;}
+.resume-confirm{background:var(--accent);color:white;border:none;border-radius:14px;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;cursor:pointer;width:100%;}
+.resume-cancel{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:14px;padding:14px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;cursor:pointer;width:100%;}
 .hidden{display:none!important;}
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--card);border-top:1px solid var(--border);padding:12px 18px calc(12px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:8px;box-shadow:0 -4px 20px rgba(0,0,0,.5);}
 .bottom-bar-total{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--warm);text-align:center;}
@@ -528,6 +534,7 @@ function updateWeightDisplay(ph){
 }
 function tick(){
   if(isPaused)return;curSec--;
+  saveWorkoutState();
   document.getElementById('bigTimer').textContent=curSec;
   document.getElementById('progressFill').style.width=(curSec/curDur*100)+'%';
   if(curSec<=3&&curSec>0)playTick();
@@ -589,8 +596,9 @@ function startWorkout(){
   document.getElementById('updateBtn').classList.add('hidden');
   launchPhase(0);if(ticker)clearInterval(ticker);ticker=setInterval(tick,1000);
 }
-function stopWorkout(){clearInterval(ticker);ticker=null;isPaused=false;try{window.speechSynthesis.cancel();}catch(e){}goSetup();}
+function stopWorkout(){clearWorkoutState();clearInterval(ticker);ticker=null;isPaused=false;try{window.speechSynthesis.cancel();}catch(e){}goSetup();}
 function finishWorkout(){
+  clearWorkoutState();
   clearInterval(ticker);ticker=null;playDone();
   setTimeout(function(){speak('Allenamento completato! Ottimo lavoro!');},700);
   var elapsed=Math.round((Date.now()-workoutStart)/1000);
@@ -647,7 +655,54 @@ function applyColor(color){
     setTimeout(function(){window.location.reload(true);},500);
   });
 }
+  function saveWorkoutState(){
+  try{
+    localStorage.setItem('wState',JSON.stringify({
+      mode:currentMode,seq:sequence,idx:seqIdx,sec:curSec,dur:curDur,
+      start:workoutStart,topSet:realTopSet,avviso:avvisoFired
+    }));
+  }catch(e){}
+}
+function clearWorkoutState(){
+  try{localStorage.removeItem('wState');}catch(e){}
+}
+function resumeSavedWorkout(){
+  document.getElementById('resumeOverlay').classList.add('hidden');
+  try{
+    var s=JSON.parse(localStorage.getItem('wState'));
+    currentMode=s.mode;sequence=s.seq;seqIdx=s.idx;
+    curSec=s.sec;curDur=s.dur;workoutStart=s.start;
+    realTopSet=s.topSet;avvisoFired=s.avviso;
+    isPaused=false;
+    document.getElementById('setup').classList.remove('active');
+    document.getElementById('timer').classList.add('active');
+    document.getElementById('doneScreen').classList.add('hidden');
+    document.getElementById('pausedOverlay').classList.add('hidden');
+    document.getElementById('topsetOverlay').classList.add('hidden');
+    document.getElementById('bottomBar').classList.add('hidden');
+    document.getElementById('updateBtn').classList.add('hidden');
+    buildDots();applyPhase(sequence[seqIdx]);
+    document.getElementById('bigTimer').textContent=curSec;
+    document.getElementById('progressFill').style.width=(curSec/curDur*100)+'%';
+    updateDots();
+    if(ticker)clearInterval(ticker);
+    ticker=setInterval(tick,1000);
+  }catch(e){dismissResume();}
+}
+function dismissResume(){
+  document.getElementById('resumeOverlay').classList.add('hidden');
+  clearWorkoutState();
+}
   try{var saved=localStorage.getItem('accentColor');if(saved)applyColor(saved);}catch(e){}
+  try{
+  var ws=localStorage.getItem('wState');
+  if(ws){
+    var wp=JSON.parse(ws);
+    var el=document.getElementById('resumeSub');
+    if(el)el.textContent='Fase '+ (wp.idx+1)+' — '+wp.sec+'s rimanenti';
+    document.getElementById('resumeOverlay').classList.remove('hidden');
+  }
+}catch(e){}
 updateSummaries();updateForzaPills();updateForzaRecap();
   fixBottomPadding();
 window.addEventListener('resize',fixBottomPadding);
@@ -672,6 +727,15 @@ document.addEventListener('touchmove',function(e){
     </div>
     <div class="color-swatches" id="colorSwatches"></div>
     <button class="color-close" onclick="closeColorPanel()">CHIUDI</button>
+  </div>
+</div>
+<div class="resume-workout-overlay hidden" id="resumeOverlay">
+  <div style="font-size:3rem">⏸</div>
+  <div class="resume-workout-title">ALLENAMENTO<br>IN CORSO</div>
+  <div class="resume-workout-sub" id="resumeSub">Vuoi riprendere da dove eri?</div>
+  <div class="resume-btn-row">
+    <button class="resume-confirm" onclick="resumeSavedWorkout()">▶ RIPRENDI</button>
+    <button class="resume-cancel" onclick="dismissResume()">NUOVO ALLENAMENTO</button>
   </div>
 </div>
 </body>
