@@ -269,6 +269,11 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
       </div>
     </div>
     <div>
+      <div style="display:flex;gap:8px;margin-bottom:4px;">
+  <select id="presetSelect" onchange="loadPreset()" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:10px 12px;"><option value="">— seleziona preset —</option></select>
+  <button onclick="deletePreset()" style="background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--muted);font-size:1.1rem;padding:10px 14px;cursor:pointer;">🗑</button>
+  <button onclick="openPresetPanel()" style="background:var(--accent);border:none;border-radius:12px;color:white;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:1px;padding:10px 14px;cursor:pointer;">SALVA</button>
+</div>
       <div id="recapForza"></div>
     </div>
     </div>
@@ -337,6 +342,7 @@ function adjustProto(delta){
   PROTO_DUR=Math.max(10,Math.min(60,PROTO_DUR+delta));
   document.getElementById('val-protoDur').innerHTML=PROTO_DUR+'<span class="unit">sec</span>';
   updateSummaries();updateForzaRecap();
+  saveAllParams();
 }
 
 const p={warmRounds:3,warmDuration:60,warmRecovery:60,midBreak:120,blocks:3,tiratePerBlock:3,trainRecovery:90,blockRecovery:180,attacks:3,attackDur:30,holdDur:10};
@@ -369,17 +375,72 @@ const fp={fwR:2,fwDur:45,fwRec:120,fb1:300,ftsR:2,ftsDur:60,ftsRec:300,ftsW:400,
 const fLIMITS={fwR:{min:0,max:20},fwDur:{min:0,max:300},fwRec:{min:0,max:600},fb1:{min:0,max:600},ftsR:{min:0,max:10},ftsDur:{min:0,max:300},ftsRec:{min:0,max:600},ftsW:{min:10,max:2000},fb2:{min:0,max:600},fboR:{min:0,max:20},fboRec:{min:0,max:600},fboPct:{min:10,max:100},fboAtt:{min:5,max:60},fboHold:{min:5,max:60},fboAtk:{min:1,max:10},fboSingle:{min:15,max:300},fb3:{min:0,max:600},fresR:{min:0,max:20},fresRec:{min:0,max:600},fresPct:{min:10,max:100},fresAtt:{min:5,max:60},fresHold:{min:5,max:60},fresAtk:{min:1,max:10},fresSingle:{min:15,max:300}};
 const fUNITS={fwR:'x',fwDur:'sec',fwRec:'sec',fb1:'sec',ftsR:'x',ftsDur:'sec',ftsRec:'sec',ftsW:'kg',fb2:'sec',fboR:'x',fboRec:'sec',fboPct:'%',fboAtt:'sec',fboHold:'sec',fboAtk:'x',fboSingle:'sec',fb3:'sec',fresR:'x',fresRec:'sec',fresPct:'%',fresAtt:'sec',fresHold:'sec',fresAtk:'x',fresSingle:'sec'};
 const fAltMode={fbo:false,fres:false};
+  function saveAllParams(){
+  try{localStorage.setItem('forzaParams',JSON.stringify({fp:fp,fAltMode:fAltMode,PROTO_DUR:PROTO_DUR}));}catch(e){}
+}
+function loadAllParams(data){
+  Object.assign(fp,data.fp);Object.assign(fAltMode,data.fAltMode);PROTO_DUR=data.PROTO_DUR||30;
+  Object.keys(fp).forEach(function(k){var el=document.getElementById('val-'+k);if(el&&fUNITS[k])el.innerHTML=fp[k]+'<span class="unit">'+fUNITS[k]+'</span>';});
+  document.getElementById('val-protoDur').innerHTML=PROTO_DUR+'<span class="unit">sec</span>';
+  ['fbo','fres'].forEach(function(b){
+    document.getElementById('tog-'+b).checked=fAltMode[b];
+    document.getElementById('alt-'+b).classList.toggle('hidden',!fAltMode[b]);
+    document.getElementById('single-'+b).classList.toggle('hidden',fAltMode[b]);
+  });
+  updateForzaPills();updateForzaRecap();updateSummaries();
+}
+function savePreset(){
+  var name=document.getElementById('presetNameInput').value.trim().replace(/["<>]/g,'');
+  if(!name)return;
+  try{
+    var presets=JSON.parse(localStorage.getItem('presets')||'[]');
+    presets=presets.filter(function(x){return x.name!==name;});
+    presets.push({name:name,fp:JSON.parse(JSON.stringify(fp)),fAltMode:JSON.parse(JSON.stringify(fAltMode)),PROTO_DUR:PROTO_DUR});
+    localStorage.setItem('presets',JSON.stringify(presets));
+  }catch(e){}
+  closePresetPanel();refreshPresetSelect();
+}
+function loadPreset(){
+  var sel=document.getElementById('presetSelect');
+  if(!sel.value)return;
+  try{
+    var presets=JSON.parse(localStorage.getItem('presets')||'[]');
+    var preset=presets.find(function(x){return x.name===sel.value;});
+    if(preset){loadAllParams(preset);saveAllParams();}
+  }catch(e){}
+}
+function deletePreset(){
+  var sel=document.getElementById('presetSelect');
+  if(!sel.value)return;
+  try{
+    var presets=JSON.parse(localStorage.getItem('presets')||'[]');
+    presets=presets.filter(function(x){return x.name!==sel.value;});
+    localStorage.setItem('presets',JSON.stringify(presets));
+  }catch(e){}
+  refreshPresetSelect();
+}
+function refreshPresetSelect(){
+  var sel=document.getElementById('presetSelect');if(!sel)return;
+  try{
+    var presets=JSON.parse(localStorage.getItem('presets')||'[]');
+    sel.innerHTML='<option value="">— seleziona preset —</option>'+presets.map(function(x){return '<option value="'+x.name+'">'+x.name+'</option>';}).join('');
+  }catch(e){}
+}
+function openPresetPanel(){document.getElementById('presetNameInput').value='';document.getElementById('presetSaveOverlay').classList.remove('hidden');}
+function closePresetPanel(){document.getElementById('presetSaveOverlay').classList.add('hidden');}
 
 function fadjust(key,delta){
   const{min,max}=fLIMITS[key];fp[key]=clamp(fp[key]+delta,min,max);
   document.getElementById('val-'+key).innerHTML=fp[key]+'<span class="unit">'+fUNITS[key]+'</span>';
   updateForzaPills();updateForzaRecap();
+  saveAllParams();
 }
 function ftoggleAlt(block){
   fAltMode[block]=document.getElementById('tog-'+block).checked;
   document.getElementById('alt-'+block).classList.toggle('hidden',!fAltMode[block]);
   document.getElementById('single-'+block).classList.toggle('hidden',fAltMode[block]);
   updateForzaPills();updateForzaRecap();
+  saveAllParams();
 }
 function fTirataDur(block){
   if(fAltMode[block]){
@@ -695,6 +756,9 @@ function dismissResume(){
   clearWorkoutState();
 }
   try{var saved=localStorage.getItem('accentColor');if(saved)applyColor(saved);}catch(e){}
+  try{var sp=localStorage.getItem('forzaParams');if(sp)loadAllParams(JSON.parse(sp));}catch(e){}
+refreshPresetSelect();
+window.addEventListener('load',function(){updateSummaries();fixBottomPadding();});
   window.addEventListener('load',function(){history.pushState(null,'',location.href);});
   window.addEventListener('popstate',function(e){if(document.getElementById('timer').classList.contains('active')){history.pushState(null,'',location.href);togglePause();}});
   document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'&&document.getElementById('timer').classList.contains('active')){saveWorkoutState();}});
@@ -740,6 +804,14 @@ document.addEventListener('touchmove',function(e){
   <div class="resume-btn-row">
     <button class="resume-confirm" onclick="resumeSavedWorkout()">▶ RIPRENDI</button>
     <button class="resume-cancel" onclick="dismissResume()">NUOVO ALLENAMENTO</button>
+  </div>
+</div>
+  <div class="color-overlay hidden" id="presetSaveOverlay" onclick="closePresetPanel()">
+  <div class="color-panel" onclick="event.stopPropagation()">
+    <div class="color-panel-title">NOME PRESET</div>
+    <input id="presetNameInput" type="text" maxlength="30" placeholder="es. Gara Milano" style="background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;width:100%;padding:12px;outline:none;text-align:center;">
+    <button onclick="savePreset()" style="background:var(--accent);color:white;border:none;border-radius:12px;padding:14px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;cursor:pointer;width:100%;">SALVA</button>
+    <button onclick="closePresetPanel()" class="color-close">ANNULLA</button>
   </div>
 </div>
 </body>
