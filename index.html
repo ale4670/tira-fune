@@ -490,18 +490,18 @@ function buildForzaSeq(){
     seq.push({type:'single',duration:fp.fwDur,label:'RISCALDAMENTO',name:"LET'S GO",badge:'RISC. '+wn+'/'+fp.fwR,extra:''});
     if(w<fp.fwR-1)seq.push({type:'warmrec',duration:fp.fwRec,label:'RECUPERO',name:'RECUPERO',badge:'RISC. '+wn+'/'+fp.fwR,extra:''});
   }
-  seq.push({type:'break',duration:fp.fb1,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
+    if(fp.fwR>0)seq.push({type:'break',duration:fp.fb1,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
   for(var t=0;t<fp.ftsR;t++){
     var badge='TOP SET '+(t+1)+'/'+fp.ftsR;
     seq.push({type:'proto',duration:PROTO_DUR,label:'PROTOCOLLO',name:'PROTOCOLLO',badge:badge,extra:''});
     seq.push({type:'single',duration:fp.ftsDur,label:'TOP SET',name:"LET'S GO",badge:badge,extra:''});
     if(t<fp.ftsR-1)seq.push({type:'recovery',duration:fp.ftsRec,label:'RECUPERO',name:'RECUPERO',badge:badge,extra:''});
   }
-  seq.push({type:'topset_input',duration:0,label:'INSERISCI PESO',name:'TOP SET',badge:'TOP SET',extra:''});
-  seq.push({type:'break',duration:fp.fb2,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
+    if(fp.ftsR>0)seq.push({type:'topset_input',duration:0,label:'INSERISCI PESO',name:'TOP SET',badge:'TOP SET',extra:''});
+  if(fp.ftsR>0)seq.push({type:'break',duration:fp.fb2,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
   var fboSeq=buildForzaTirate('fbo',fp.fboR,fp.fboRec,'BACK OFF',fAltMode.fbo);
   fboSeq.forEach(function(ph){seq.push(ph);});
-  seq.push({type:'break',duration:fp.fb3,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
+    if(fp.fboR>0)seq.push({type:'break',duration:fp.fb3,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
   var fresSeq=buildForzaTirate('fres',fp.fresR,fp.fresRec,'RESIST.',fAltMode.fres);
   fresSeq.forEach(function(ph){seq.push(ph);});
   return seq;
