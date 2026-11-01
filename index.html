@@ -695,8 +695,8 @@ function dismissResume(){
 }
   try{var saved=localStorage.getItem('accentColor');if(saved)applyColor(saved);}catch(e){}
   window.addEventListener('load',function(){history.pushState(null,'',location.href);});
-window.addEventListener('popstate',function(e){if(document.getElementById('timer').classList.contains('active')){history.pushState(null,'',location.href);pauseWorkout();}});
-document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'&&document.getElementById('timer').classList.contains('active')){saveWorkoutState();}});
+  window.addEventListener('popstate',function(e){if(document.getElementById('timer').classList.contains('active')){history.pushState(null,'',location.href);togglePause();}});
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'&&document.getElementById('timer').classList.contains('active')){saveWorkoutState();}});
   try{
   var ws=localStorage.getItem('wState');
   if(ws){
