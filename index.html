@@ -136,7 +136,7 @@ body{font-family:'Barlow Condensed',sans-serif;background:var(--bg);color:var(--
   <!-- PRESET -->
 <div>
   <div style="display:flex;gap:8px;">
-    <select id="presetSelect" onchange="loadPreset()" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:10px 12px;"><option value="">— seleziona preset —</option></select>
+    <select id="presetSelect" onchange="loadPreset()" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;padding:10px 12px;"><option value="" selected disabled hidden>seleziona preset</option></select>
     <button onclick="deletePreset()" style="background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--muted);padding:10px 14px;cursor:pointer;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
     <button onclick="openPresetPanel()" style="background:var(--accent);border:none;border-radius:12px;color:white;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:1px;padding:10px 14px;cursor:pointer;">SALVA</button>
   </div>
@@ -421,7 +421,7 @@ function refreshPresetSelect(){
   var sel=document.getElementById('presetSelect');if(!sel)return;
   try{
     var presets=JSON.parse(localStorage.getItem('presets')||'[]');
-    sel.innerHTML='<option value="">— seleziona preset —</option>'+presets.map(function(x){return '<option value="'+x.name+'">'+x.name+'</option>';}).join('');
+    sel.innerHTML='<option value="" selected disabled hidden>seleziona preset</option>'+presets.map(function(x){return '<option value="'+x.name+'">'+x.name+'</option>';}).join('');
   }catch(e){}
 }
 function openPresetPanel(){document.getElementById('presetNameInput').value='';document.getElementById('presetSaveOverlay').classList.remove('hidden');}
