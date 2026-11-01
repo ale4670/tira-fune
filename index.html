@@ -504,6 +504,7 @@ function buildForzaSeq(){
     if(fp.fboR>0)seq.push({type:'break',duration:fp.fb3,label:'PAUSA',name:'PAUSA',badge:'PAUSA',extra:''});
   var fresSeq=buildForzaTirate('fres',fp.fresR,fp.fresRec,'RESIST.',fAltMode.fres);
   fresSeq.forEach(function(ph){seq.push(ph);});
+    while(seq.length>0&&(seq[seq.length-1].type==='break'||seq[seq.length-1].type==='topset_input'))seq.pop();
   return seq;
 }
 
